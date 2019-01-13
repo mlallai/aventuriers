@@ -1,0 +1,40 @@
+{
+  "name": "adventurer",
+  "version": "1.0.0",
+  "description": "Online Platform for Eco Adventurers",
+  "main": "server.js",
+  "scripts": {
+    "client-install": "npm install --prefix client",
+    "start": "node server.js",
+    "server": "nodemon server.js",
+    "client": "npm start --prefix client",
+    "dev": "concurrently \"npm run server \" \"npm run client\"",
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client "
+  },
+  "author": "Adventurer SAS",
+  "license": "ISC",
+  "dependencies": {
+    "async": "^2.6.1",
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.18.3",
+    "chartist": "^0.11.0",
+    "cloudinary": "^1.13.2",
+    "concurrently": "^4.1.0",
+    "crypto": "^1.0.1",
+    "express": "^4.16.4",
+    "gravatar": "^1.8.0",
+    "jsonwebtoken": "^8.4.0",
+    "mongoose": "^5.3.14",
+    "nodemailer": "^4.6.8",
+    "nodemailer-express-handlebars": "^3.0.0",
+    "passport": "^0.4.0",
+    "passport-jwt": "^4.0.0",
+    "query-string": "^6.2.0",
+    "validator": "^10.9.0"
+  },
+  "devDependencies": {
+    "node-sass": "^4.10.0",
+    "nodemon": "^1.18.7",
+    "sass-loader": "^7.1.0"
+  }
+}
