@@ -1,7 +1,6 @@
 import axios from 'axios';
 
 import {
-    ADD_MESSAGE,
     GET_ERRORS,
     GET_USER_MESSAGES,
     GET_MESSAGE,

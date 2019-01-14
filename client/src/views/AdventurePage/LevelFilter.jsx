@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from "react-redux";
 import { updateFilters } from '../../actions/filterBySportActions';
-import Badge from "components/Badge/Badge.jsx";
 import FilterCheckbox from './FilterCheckbox';
 import GridItem from "components/Grid/GridItem.jsx";
 

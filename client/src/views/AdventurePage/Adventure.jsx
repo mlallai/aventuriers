@@ -6,18 +6,12 @@ import { connect } from 'react-redux';
 import { getAdventure, addToWishList, removeFromWishList } from '../../actions/adventureActions';
 import { addMessage} from '../../actions/messageActions';
 import Moment from 'react-moment';
-import { Link } from "react-router-dom";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Carousel } from 'react-responsive-carousel';
 
-// react component used to create nice image meadia player
-import ImageGallery from "react-image-gallery";
 // @material-ui/core components
 import Avatar from '@material-ui/core/Avatar';
 import withStyles from "@material-ui/core/styles/withStyles";
-import FormControl from "@material-ui/core/FormControl";
-import Select from "@material-ui/core/Select";
-import MenuItem from "@material-ui/core/MenuItem";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import Dialog from "@material-ui/core/Dialog";
@@ -28,11 +22,8 @@ import Close from "@material-ui/icons/Close";
 import Slide from "@material-ui/core/Slide";
 
 // @material-ui/icons
-import ShoppingCart from "@material-ui/icons/ShoppingCart";
-import LocalShipping from "@material-ui/icons/LocalShipping";
-import VerifiedUser from "@material-ui/icons/VerifiedUser";
+
 import Favorite from "@material-ui/icons/Favorite";
-import Reply from "@material-ui/icons/Reply";
 import StarRate from "@material-ui/icons/StarRate";
 import MailOutline from "@material-ui/icons/MailOutline";
 import Place from "@material-ui/icons/Place";
@@ -46,10 +37,7 @@ import HeaderLinks from "components/Header/HeaderLinks.jsx";
 import HeaderLinksAuth from "components/Header/HeaderLinksAuth.jsx";
 import Spinner from "components/common/Spinner.js";
 import Badge from "components/Badge/Badge.jsx";
-import avatar from "assets/img/faces/avatar.jpg";
-import Media from "components/Media/Media.jsx";
 import CommentForm from "views/AdventurePage/CommentForm.jsx";
-import CommentFeed from "views/AdventurePage/CommentFeed.jsx";
 import CommentItem from './CommentItem';
 import AlertMessageModal from './AlertMessageModal.jsx';
 
@@ -59,28 +47,8 @@ import GridContainer from "components/Grid/GridContainer.jsx";
 import GridItem from "components/Grid/GridItem.jsx";
 import Footer from "components/Footer/Footer.jsx";
 import Button from "components/CustomButtons/Button.jsx";
-import Accordion from "components/Accordion/Accordion.jsx";
-import InfoArea from "components/InfoArea/InfoArea.jsx";
-import Card from "components/Card/Card.jsx";
-import CardHeader from "components/Card/CardHeader.jsx";
-import CardBody from "components/Card/CardBody.jsx";
-import CardFooter from "components/Card/CardFooter.jsx";
-import Tooltip from "@material-ui/core/Tooltip";
-import CardAvatar from "components/Card/CardAvatar.jsx";
-import kendall from "assets/img/faces/kendall.jpg";
-import marc from "assets/img/faces/marc.jpg";
 
 import productStyle from "assets/jss/material-kit-pro-react/views/productStyle.jsx";
-import styles from "assets/jss/material-kit-pro-react/views/componentsSections/sectionCards.jsx";
-
-// images
-import product1 from "assets/img/examples/mount-1.jpg";
-import product2 from "assets/img/examples/mount-2.jpg";
-import product3 from "assets/img/examples/mount-3.jpg";
-import product4 from "assets/img/examples/mount-4.jpg";
-import product5 from "assets/img/examples/mount-5.jpg";
-import product6 from "assets/img/examples/mount-6.jpg";
-
 
 const dashboardRoutes = [];
 
@@ -137,8 +105,7 @@ class Adventure extends React.Component {
 
   componentWillReceiveProps(nextProps) {
 
-    const { adventure, auth } = nextProps;
-    const { isAuthenticated, user } = this.props.auth;
+    const { adventure } = nextProps;
     const loadedUser  = nextProps.adventure.adventure.user;
     const loadedProfile  = nextProps.adventure.adventure.profile;
 

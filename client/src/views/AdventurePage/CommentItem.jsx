@@ -5,10 +5,6 @@ import { deleteComment } from '../../actions/adventureActions';
 
 import withStyles from "@material-ui/core/styles/withStyles";
 
-import Media from "components/Media/Media.jsx";
-import CustomInput from "components/CustomInput/CustomInput.jsx";
-import Reply from "@material-ui/icons/Reply";
-import Button from "components/CustomButtons/Button.jsx";
 import Moment from "react-moment";
 import Avatar from '@material-ui/core/Avatar';
 import GridContainer from "components/Grid/GridContainer.jsx";

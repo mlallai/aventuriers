@@ -1,16 +1,11 @@
 import React from "react";
-import classNames from "classnames";
 import { PropTypes } from 'prop-types';
 import { connect } from 'react-redux';
 import { getCurrentProfile } from '../../actions/profileActions';
-import { Link } from 'react-router-dom';
 // @material-ui/core components
 import withStyles from "@material-ui/core/styles/withStyles";
 
 // @material-ui/icons
-import Dashboard from "@material-ui/icons/Dashboard";
-import Schedule from "@material-ui/icons/Schedule";
-import List from "@material-ui/icons/List";
 
 // core components
 import GridContainer from "components/Grid/GridContainer.jsx";

@@ -5,9 +5,7 @@ import { addComment } from '../../actions/adventureActions';
 
 import withStyles from "@material-ui/core/styles/withStyles";
 
-import Media from "components/Media/Media.jsx";
 import CustomInput from "components/CustomInput/CustomInput.jsx";
-import Reply from "@material-ui/icons/Reply";
 import Button from "components/CustomButtons/Button.jsx";
 import Avatar from '@material-ui/core/Avatar';
 import GridContainer from "components/Grid/GridContainer.jsx";
@@ -54,9 +52,8 @@ class CommentForm extends Component {
     this.setState({ [e.target.name]: e.target.value });
   }
    render() {
-    const { errors } = this.state;
     const { classes, ...rest  } = this.props;
-    const { isAuthenticated, user } = this.props.auth;
+    const { user } = this.props.auth;
      return (
 
         <div>

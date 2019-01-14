@@ -1,41 +1,24 @@
 import React from "react";
-import Datetime from "react-datetime";
-import classnames from 'classnames';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { registerUser } from '../../actions/authActions';
 import {withRouter} from 'react-router-dom'
 import { getCurrentProfile, createProfile } from '../../actions/profileActions';
-import axios from 'axios';
-import classNames from "classnames";
 import isEmpty from 'validation/isEmpty.js';
 import TagsInput from "react-tagsinput";
 
 
 // @material-ui/core components
 import withStyles from "@material-ui/core/styles/withStyles";
-import InputAdornment from "@material-ui/core/InputAdornment";
-import Checkbox from "@material-ui/core/Checkbox";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
-import Icon from "@material-ui/core/Icon";
 import TextField from '@material-ui/core/TextField';
-import Layers from "@material-ui/icons/Layers";
 
 // @material-ui/icons
-import Timeline from "@material-ui/icons/Timeline";
-import Code from "@material-ui/icons/Code";
-import Group from "@material-ui/icons/Group";
-import Face from "@material-ui/icons/Face";
-import Email from "@material-ui/icons/Email";
-import Check from "@material-ui/icons/Check";
 import Favorite from "@material-ui/icons/Favorite";
 // core components
 import Header from "components/Header/Header.jsx";
 import HeaderLinks from "components/Header/HeaderLinks.jsx";
 import HeaderLinksAuth from "components/Header/HeaderLinksAuth.jsx";
-import CustomFileInput from "components/CustomFileInput/CustomFileInput.jsx";
 
 import Footer from "components/Footer/Footer.jsx";
 import GridContainer from "components/Grid/GridContainer.jsx";
@@ -43,12 +26,7 @@ import GridItem from "components/Grid/GridItem.jsx";
 import Button from "components/CustomButtons/Button.jsx";
 import Card from "components/Card/Card.jsx";
 import CardBody from "components/Card/CardBody.jsx";
-import InfoArea from "components/InfoArea/InfoArea.jsx";
 import CustomInput from "components/CustomInput/CustomInput.jsx";
-import Select from "@material-ui/core/Select";
-import MenuItem from "@material-ui/core/MenuItem";
-import InputLabel from "@material-ui/core/InputLabel";
-import FormControl from "@material-ui/core/FormControl";
 
 import signupPageStyle from "assets/jss/material-kit-pro-react/views/signupPageStyle.jsx";
 
@@ -145,7 +123,6 @@ onSubmit(e) {
   render() {
     const { classes, ...rest } = this.props;
     const { errors } = this.state;
-    const { profile, loading } = this.props.profile;
     const { isAuthenticated, user } = this.props.auth;
 
     return (

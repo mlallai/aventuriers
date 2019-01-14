@@ -1,31 +1,16 @@
 import React from "react";
-import Datetime from "react-datetime";
-import classnames from 'classnames';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import {withRouter} from 'react-router-dom'
 import Moment from 'react-moment';
 import { getMessage, addReply } from '../../actions/messageActions';
 
-import isEmpty from 'validation/isEmpty.js';
-
 // @material-ui/core components
 import withStyles from "@material-ui/core/styles/withStyles";
-import InputAdornment from "@material-ui/core/InputAdornment";
-import Checkbox from "@material-ui/core/Checkbox";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
-import Icon from "@material-ui/core/Icon";
 // @material-ui/icons
-import Timeline from "@material-ui/icons/Timeline";
-import Code from "@material-ui/icons/Code";
-import Group from "@material-ui/icons/Group";
-import Face from "@material-ui/icons/Face";
-import Email from "@material-ui/icons/Email";
-import Check from "@material-ui/icons/Check";
 import Favorite from "@material-ui/icons/Favorite";
-import Reply from "@material-ui/icons/Reply";
 
 // core components
 import Header from "components/Header/Header.jsx";
@@ -38,19 +23,13 @@ import GridItem from "components/Grid/GridItem.jsx";
 import Button from "components/CustomButtons/Button.jsx";
 import Card from "components/Card/Card.jsx";
 import CardBody from "components/Card/CardBody.jsx";
-import InfoArea from "components/InfoArea/InfoArea.jsx";
 import CustomInput from "components/CustomInput/CustomInput.jsx";
-import Select from "@material-ui/core/Select";
-import MenuItem from "@material-ui/core/MenuItem";
-import InputLabel from "@material-ui/core/InputLabel";
-import FormControl from "@material-ui/core/FormControl";
 import Media from "components/Media/Media.jsx";
 import Spinner from "components/common/Spinner.js";
 
 import signupPageStyle from "assets/jss/material-kit-pro-react/views/signupPageStyle.jsx";
 
 import image from "assets/img/mountain.jpg";
-
 
 const dashboardRoutes = [];
 
@@ -77,7 +56,7 @@ componentWillMount() {
   }
 
 componentWillReceiveProps(nextProps) {
-    const { message, auth } = nextProps;
+    const { message } = nextProps;
     if(message.message) {
         const loadedMessage = message.message;
         const loadedMessageSenderID = message.message.senderID;
@@ -103,7 +82,7 @@ onSubmit(e) {
 
   render() {
     const { classes, message, ...rest } = this.props;
-    const { errors, loadedMessage, loadedReplies, loadedMessageSenderID, loadedMessageRecipientID } = this.state;
+    const { loadedMessage, loadedReplies, loadedMessageSenderID, loadedMessageRecipientID } = this.state;
     const { isAuthenticated, user } = this.props.auth;
 
     // Setup of conversation user

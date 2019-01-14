@@ -15,25 +15,15 @@ import Moment from "react-moment";
 
 // @material-ui/core components
 import withStyles from "@material-ui/core/styles/withStyles";
-import Tooltip from "@material-ui/core/Tooltip";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 // @material-ui/icons
-import Camera from "@material-ui/icons/Camera";
-import Palette from "@material-ui/icons/Palette";
-import People from "@material-ui/icons/People";
-import Add from "@material-ui/icons/Add";
+
 import Favorite from "@material-ui/icons/Favorite";
 import History from "@material-ui/icons/History";
 import AddCircle from "@material-ui/icons/AddCircle";
 import Edit from "@material-ui/icons/Edit";
 
-import Table from "@material-ui/core/Table";
-import TableBody from "@material-ui/core/TableBody";
-import TableCell from "@material-ui/core/TableCell";
-import TableHead from "@material-ui/core/TableHead";
-import TableRow from "@material-ui/core/TableRow";
-import Paper from "@material-ui/core/Paper";
 import Avatar from '@material-ui/core/Avatar';
 import AppBar from '@material-ui/core/AppBar';
 import Tabs from '@material-ui/core/Tabs';
@@ -47,40 +37,18 @@ import GridContainer from "components/Grid/GridContainer.jsx";
 import GridItem from "components/Grid/GridItem.jsx";
 import HeaderLinks from "components/Header/HeaderLinks.jsx";
 import HeaderLinksAuth from "components/Header/HeaderLinksAuth.jsx";
-import NavPills from "components/NavPills/NavPills.jsx";
 import Card from "components/Card/Card.jsx";
 import CardBody from "components/Card/CardBody.jsx";
 import CardHeader from "components/Card/CardHeader.jsx";
 import Badge from "components/Badge/Badge.jsx";
-import Muted from "components/Typography/Muted.jsx";
 import Parallax from "components/Parallax/Parallax.jsx";
 import Clearfix from "components/Clearfix/Clearfix.jsx";
 import Button from "components/CustomButtons/Button.jsx";
-import SectionPills from "views/ComponentsPage/Sections/SectionPills";
-import CardFooter from "components/Card/CardFooter.jsx";
-import CardAvatar from "components/Card/CardAvatar.jsx";
-import Accordion from "components/Accordion/Accordion.jsx";
 import Info from "components/Typography/Info.jsx";
 
 
-import christian from "assets/img/faces/christian.jpg";
-import oluEletu from "assets/img/examples/olu-eletu.jpg";
-import clemOnojeghuo from "assets/img/examples/clem-onojeghuo.jpg";
-import cynthiaDelRio from "assets/img/examples/cynthia-del-rio.jpg";
-import mariyaGeorgieva from "assets/img/examples/mariya-georgieva.jpg";
-import clemOnojegaw from "assets/img/examples/clem-onojegaw.jpg";
-import darrenColeshill from "assets/img/examples/darren-coleshill.jpg";
-import avatar from "assets/img/faces/avatar.jpg";
-import marc from "assets/img/faces/marc.jpg";
-import kendall from "assets/img/faces/kendall.jpg";
-import cardProfile2Square from "assets/img/faces/card-profile2-square.jpg";
-
 import profilePageStyle from "assets/jss/material-kit-pro-react/views/profilePageStyle.jsx";
 import Spinner from "components/common/Spinner.js";
-import CreateProfile from "views/ProfilePage/CreateProfile.jsx";
-import ProfileSectionPills from "views/ProfilePage/ProfileSectionPills.jsx";
-
-import cardAdv from "assets/img/examples/mount-1.jpg";
 
 const dashboardRoutes = [];
 

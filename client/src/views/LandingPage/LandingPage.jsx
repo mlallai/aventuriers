@@ -13,11 +13,8 @@ import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 // @material-ui/icons
 import Favorite from "@material-ui/icons/Favorite";
-import Explore from "@material-ui/icons/Explore";
 import Search from "@material-ui/icons/Search";
-import Extension from "@material-ui/icons/Extension";
-import ChildFriendly from "@material-ui/icons/ChildFriendly";
-import WatchLater from "@material-ui/icons/WatchLater";
+
 // core components
 import Header from "components/Header/Header.jsx";
 import Footer from "components/Footer/Footer.jsx";
@@ -31,33 +28,22 @@ import SectionPreFooter from "views/ComponentsPage/Sections/SectionPreFooter.jsx
 import Card from "components/Card/Card.jsx";
 import CardBody from "components/Card/CardBody.jsx";
 import CardHeader from "components/Card/CardHeader.jsx";
-import Danger from "components/Typography/Danger.jsx";
-import TrendingUp from "@material-ui/icons/TrendingUp";
-import Success from "components/Typography/Success.jsx";
+
 import Info from "components/Typography/Info.jsx";
-import InfoArea from "components/InfoArea/InfoArea.jsx";
 import Badge from "components/Badge/Badge.jsx";
 
 import landingPageStyle from "assets/jss/material-kit-pro-react/views/landingPageStyle.jsx";
-import featuresStyle from "assets/jss/material-kit-pro-react/views/sectionsSections/featuresStyle.jsx";
 
-// Sections for this page
-import SectionProduct from "./Sections/SectionProduct.jsx";
-import SectionTeam from "./Sections/SectionTeam.jsx";
-import SectionWork from "./Sections/SectionWork.jsx";
 
-import mountainAdv from "assets/img/examples/mountainAdv.jpeg";
 import mountainPic from "assets/img/examples/mountainPic.jpg";
 import kitesurfPic from "assets/img/examples/kitesurfPic.jpg";
 import parachutePic from "assets/img/examples/parachutePic.jpg";
 import trekkingPic from "assets/img/examples/trekkingPic.jpg";
-import iphone from "assets/img/sections/iphone.png";
 
 import Features from "./Features.jsx";
 
 import Spinner from "components/common/Spinner.js";
 import EcoBadge from "assets/img/logos/ecoBadge-small.png";
-import Star from "assets/img/logos/star.png";
 
 
 const dashboardRoutes = [];
@@ -91,7 +77,7 @@ class LandingPage extends React.Component {
   
   render() {
     const { classes, ...rest } = this.props;
-    const { isAuthenticated, user } = this.props.auth;
+    const { isAuthenticated } = this.props.auth;
     const { loadedAdventures, loading} = this.state;
 
     let adventureLandingItem;

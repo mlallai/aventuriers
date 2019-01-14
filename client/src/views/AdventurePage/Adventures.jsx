@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 import { getAdventures } from "../../actions/adventureActions";
 import SportFilter from './SportFilter';
 import LevelFilter from './LevelFilter';
-import RecurringFilter from './RecurringFilter';
 import { Link } from "react-router-dom";
 import Moment from "react-moment";
 
@@ -14,7 +13,6 @@ import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 // @material-ui/icons
 import Favorite from "@material-ui/icons/Favorite";
-import TrendingUp from "@material-ui/icons/TrendingUp";
 // core components
 import Header from "components/Header/Header.jsx";
 import HeaderLinks from "components/Header/HeaderLinks.jsx";
@@ -23,17 +21,12 @@ import GridContainer from "components/Grid/GridContainer.jsx";
 import GridItem from "components/Grid/GridItem.jsx";
 import Parallax from "components/Parallax/Parallax.jsx";
 // sections for this page
-import SectionPills from "./Sections/SectionPills.jsx";
-import SectionInterested from "./Sections/SectionInterested.jsx";
-import SectionImage from "./Sections/SectionImage.jsx";
-import SubscribeLine from "./Sections/SubscribeLine.jsx";
-import NavPills from "components/NavPills/NavPills.jsx";
+
 import Card from "components/Card/Card.jsx";
 import CardHeader from "components/Card/CardHeader.jsx";
 import CardBody from "components/Card/CardBody.jsx";
 import Info from "components/Typography/Info.jsx";
-import Success from "components/Typography/Success.jsx";
-import Danger from "components/Typography/Danger.jsx";
+
 import HeaderLinksAuth from "components/Header/HeaderLinksAuth.jsx";
 import Spinner from "components/common/Spinner.js";
 import Accordion from "components/Accordion/Accordion.jsx";
@@ -41,7 +34,6 @@ import Button from "components/CustomButtons/Button.jsx";
 import Badge from "components/Badge/Badge.jsx";
 
 
-import mountainAdv from "assets/img/examples/mountainAdv.jpeg";
 import EcoBadge from "assets/img/logos/ecoBadge-small.png";
 
 
@@ -101,7 +93,7 @@ class Adventures extends React.Component {
     const { loadedAdventures, loading } = this.state;
     console.log("loadedAdventures dans le render", loadedAdventures)
     // const { adventures, loading } = this.props.adventures;
-    const { isAuthenticated, user } = this.props.auth;
+    const { isAuthenticated } = this.props.auth;
 
     let adventureItems;
     if (loadedAdventures === null || loading) {
