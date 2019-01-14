@@ -2,6 +2,9 @@ const express = require('express');
 const router = express.Router();
 const mongoose = require('mongoose');
 const passport = require('passport');
+const nodemailer = require('nodemailer');
+const hbs = require('nodemailer-express-handlebars');
+const path = require('path');
 
 // Load Validation
 const validateAdventureInput = require('../../validation/adventure');
@@ -13,6 +16,26 @@ const Adventure = require('../../models/Adventure');
 const Profile = require('../../models/Profile');
 // Load User Model
 const User = require('../../models/User');
+
+// Set nodemailer options
+const email = require('../../config/keys').mailerEmailId;
+const pass = require('../../config/keys').mailerPassword;
+
+const smtpTransport = nodemailer.createTransport({
+    service: process.env.MAILER_SERVICE_PROVIDER || 'Gmail',
+    auth: {
+      user: email,
+      pass: pass
+    }
+  });
+  
+  const handlebarsOptions = {
+    viewEngine: 'handlebars',
+    viewPath: path.resolve('./routes/templates'),
+    extName: '.html'
+  };
+  
+  smtpTransport.use('compile', hbs(handlebarsOptions));
 
 
 // @route GET api/adventures/test
@@ -384,6 +407,32 @@ router.post('/comment/:id', passport.authenticate('jwt', {session: false}), (req
 
         // Save
         adventure.save().then(adventure => res.json(adventure));
+        console.log("adventure saved after comment", adventure.user)
+            // Find Recipient to send him a mail notif
+    User.findOne({
+        _id: adventure.user
+    })
+    .then(user => {
+let data = {
+    to: user.email,
+    from: email,
+    template: 'message-email',
+    subject: 'Commentaire reçu sur Aventuriers.co !',
+    context: {
+        url: 'http://localhost:3000/messages',
+        name: user.firstName,
+        message: req.body.text
+    }
+  };
+  smtpTransport.sendMail(data, (err) => {
+    if(!err) {
+      return res.json({ message: 'Kindly check your email for further instructions' });
+    } 
+    // else {
+    //   return done(err);
+    // }
+  });
+});
 
     })
     .catch(err => res.status(404).json({ adventurenotfound: "No adventure found !" }));

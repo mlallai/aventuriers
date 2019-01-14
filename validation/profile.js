@@ -7,6 +7,7 @@ module.exports = function validateProfileInput(data) {
     data.desc = !isEmpty(data.desc) ? data.desc : '';
     data.sports = !isEmpty(data.sports) ? data.sports : '';
     data.location = !isEmpty(data.location) ? data.location : '';
+    data.age = !isEmpty(data.age) ? data.age : '';
 
     if (!Validator.isLength (data.desc, { min: 10, max: 300 })) {
         errors.desc = 'Votre description doit faire entre 10 et 300 caractères'
@@ -16,7 +17,9 @@ module.exports = function validateProfileInput(data) {
         errors.location = 'Lieu d\'habitation requis'
     }
 
-    // if (!Validator.isNumeric(data.age) && !Validator.isEmpty(data.age)) {
+    // if (
+    //     // !Validator.isNumeric(data.age) && 
+    //      !Validator.isEmpty(data.age)) {
     //     errors.age = 'Saisissez un nombre'
     // }
 

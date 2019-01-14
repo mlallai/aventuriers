@@ -84,6 +84,24 @@ router.post('/register', (req, res) => {
                         newUser.save()
                             .then(user => {
                             doWeSendBackToken(req, res, user);
+                            let data = {
+                              to: user.email,
+                              from: email,
+                              template: 'inscription-email',
+                              subject: 'Bienvenue sur Aventuriers.co !',
+                              context: {
+                                url: 'http://localhost:3000/profile',
+                                name: user.firstName,
+                                message: req.body.text
+                            }
+                            };
+                            smtpTransport.sendMail(data, (err) => {
+                              if(!err) {
+                                return res.json({ message: 'Kindly check your email for further instructions' });
+                              } else {
+                                return done(err);
+                              }
+                            });
                           })
                             .catch(err => console.log(err))
                     })

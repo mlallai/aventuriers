@@ -43,11 +43,11 @@ export const createProfile= (profileData, history) => dispatch => {
     axios
         .post('/api/profile', profileData)
         .then(res => history.push('/profile'))
-        // .catch(err =>
-        //     dispatch({
-        //         type: GET_ERRORS,
-        //         payload: err.response.data
-        //     }));
+        .catch(err =>
+            dispatch({
+                type: GET_ERRORS,
+                payload: err.response.data
+            }));
 }
 
 // Add experience
