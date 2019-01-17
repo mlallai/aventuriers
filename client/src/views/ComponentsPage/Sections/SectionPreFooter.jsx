@@ -14,7 +14,7 @@ import InputAdornment from "@material-ui/core/InputAdornment";
 // @material-ui icons
 import Mail from "@material-ui/icons/Mail";
 
-import bg7 from "assets/img/bg7.jpg";
+import mountainAdv from "assets/img/examples/mountainAdv.jpeg";
 
 import styles from "assets/jss/material-kit-pro-react/views/componentsSections/preFooter.jsx";
 
@@ -243,7 +243,7 @@ const SectionPreFooter = props => {
           classes.subscribeLine,
           classes.subscribeLineImage
         )}
-        style={{ backgroundImage: `url(${bg7})` }}
+        style={{ backgroundImage: `url(${mountainAdv})` }}
       >
         <div className={classes.container}>
           <GridContainer>
@@ -254,9 +254,12 @@ const SectionPreFooter = props => {
               className={classNames(classes.mlAuto, classes.mrAuto)}
             >
               <div className={classes.textCenter}>
-                <h3 className={classes.title}>Inscrivez-vous à notre newsletter</h3>
+                <h3 className={classes.title}>
+                  Inscrivez-vous à notre newsletter
+                </h3>
                 <p className={classes.description}>
-                  Recevez notre newsletter bourrée de bons plans toutes les semaines
+                  Recevez notre newsletter bourrée de bons plans toutes les
+                  semaines
                 </p>
               </div>
               <Card raised className={classes.card}>
@@ -286,7 +289,9 @@ const SectionPreFooter = props => {
                           block
                           className={classes.subscribeButton}
                         >
-                          <span style={{color: 'black', fontWeight: 'bold'}}>Envoyer</span>
+                          <span style={{ color: "black", fontWeight: "bold" }}>
+                            Envoyer
+                          </span>
                         </Button>
                       </GridItem>
                     </GridContainer>
