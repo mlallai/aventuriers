@@ -294,11 +294,7 @@ class Adventure extends React.Component {
     if (pictures === undefined || null || loading) {
       adventureMainPic = <Spinner />;
     } else {
-      if (pictures[0]) {
-        adventureMainPic = pictures[0];
-      } else {
-        adventureMainPic = loadedAdventure.defaultPictures[0];
-      }
+      adventureMainPic = loadedAdventure.defaultPictures[0];
     }
 
     let loadedComments;

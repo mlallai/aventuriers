@@ -215,7 +215,11 @@ class AddAdventure extends React.Component {
           return response.json();
         })
         .then(pictures => {
-          handleUploadPics.push(pictures.url);
+          // console.log("pictures cloudinary", pictures);
+          let publicId = pictures.public_id;
+          let newUrl = `http://res.cloudinary.com/adventurer/image/upload/w_220,h_170/q_auto/v1547745848/${publicId}.jpg`;
+          handleUploadPics.push(newUrl);
+          // handleUploadPics.push(pictures.url);
         });
       // .then(function(response) {
       //   console.log("response.data", response);
@@ -836,7 +840,7 @@ class AddAdventure extends React.Component {
                                   {isDragActive ? (
                                     <p>Drop files here...</p>
                                   ) : (
-                                    <Button color="primary" size="sm">
+                                    <Button color="info" size="sm">
                                       Sélectionnez vos photos
                                     </Button>
                                   )}

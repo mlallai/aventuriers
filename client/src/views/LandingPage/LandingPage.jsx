@@ -93,12 +93,16 @@ class LandingPage extends React.Component {
                 <div style={{ width: "100%" }}>
                   {adv.pictures[0] ? (
                     <Link to={`/adventure/${adv._id}`}>
-                      <img src={adv.pictures[0]} alt="..." />
+                      <img
+                        style={{ minHeight: "170px", maxHeight: "170px" }}
+                        src={adv.pictures[0]}
+                        alt="..."
+                      />
                     </Link>
                   ) : (
                     <Link to={`/adventure/${adv._id}`}>
                       <img
-                        style={{ minHeight: "170px" }}
+                        style={{ minHeight: "170px", maxHeight: "170px" }}
                         src={adv.defaultPictures[0]}
                         alt="..."
                       />
