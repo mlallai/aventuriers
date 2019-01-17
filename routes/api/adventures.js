@@ -144,6 +144,7 @@ router.post(
     if (req.body.recurring) adventureFields.recurring = req.body.recurring;
     if (req.body.summary) adventureFields.summary = req.body.summary;
     if (req.body.level) adventureFields.level = req.body.level;
+    if (req.body.ecoLabel) adventureFields.ecoLabel = req.body.ecoLabel;
     if (req.body.requiredPeople)
       adventureFields.requiredPeople = req.body.requiredPeople;
     if (req.body.country) adventureFields.country = req.body.country;
@@ -342,6 +343,7 @@ router.post(
       // if (req.body.secondActivity) adventureFields.secondActivity = req.body.secondActivity.split(',');
       if (req.body.summary) adventureFields.summary = req.body.summary;
       if (req.body.level) adventureFields.level = req.body.level;
+      if (req.body.ecoLabel) adventureFields.ecoLabel = req.body.ecoLabel;
       if (req.body.requiredPeople)
         adventureFields.requiredPeople = req.body.requiredPeople;
       if (req.body.country) adventureFields.country = req.body.country;
