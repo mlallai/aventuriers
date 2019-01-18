@@ -580,7 +580,7 @@ class Adventure extends React.Component {
                 <GridItem xs={4} style={{ paddingLeft: "70px" }}>
                   <StarRate style={{ color: "#ffcc00" }} />
                 </GridItem>
-                <GridItem xs={4}>
+                <GridItem xs={6}>
                   <p
                     style={{
                       marginBottom: "-8px",
@@ -633,7 +633,7 @@ class Adventure extends React.Component {
                 <GridItem xs={4} style={{ paddingLeft: "70px" }}>
                   <ShowChart style={{ color: "#ffcc00" }} />
                 </GridItem>
-                <GridItem xs={4}>
+                <GridItem xs={6}>
                   <p
                     style={{
                       marginBottom: "-8px",
@@ -647,7 +647,7 @@ class Adventure extends React.Component {
                   </p>
                   <p
                     style={{
-                      lineHeight: "2em",
+                      lineHeight: "1.3em",
                       marginBottom: "-8px",
                       color: "black",
                       fontSize: "11px"
@@ -655,6 +655,7 @@ class Adventure extends React.Component {
                   >
                     {loadedAdventure.mainActivity}
                   </p>
+                  <br />
                 </GridItem>
               </GridContainer>
             </GridItem>

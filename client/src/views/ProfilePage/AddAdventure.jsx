@@ -9,6 +9,7 @@ import axios from "axios";
 import classNames from "classnames";
 import { GoogleComponent } from "react-google-location";
 import countriesSelect from "./Countries";
+import Place from "react-algolia-places";
 
 // @material-ui/core components
 import withStyles from "@material-ui/core/styles/withStyles";
@@ -76,13 +77,18 @@ class AddAdventure extends React.Component {
       uploadedPics: [],
       address: "",
       place: "",
-      ecoLabel: []
+      ecoLabel: [],
+      cityName: "",
+      cityLat: "",
+      cityLng: "",
+      cityCountry: "",
+      cityPostcode: ""
     };
     this.handleToggle = this.handleToggle.bind(this);
     this.mainActivitySelected = this.mainActivitySelected.bind(this);
     this.levelSelected = this.levelSelected.bind(this);
     this.requiredPeopleSelected = this.requiredPeopleSelected.bind(this);
-    // this.handleUploadImages = this.handleUploadImages.bind(this);
+    this.handleCity = this.handleCity.bind(this);
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
   }
@@ -112,14 +118,13 @@ class AddAdventure extends React.Component {
       summary: this.state.summary,
       level: this.state.level,
       requiredPeople: this.state.requiredPeople,
-      country: this.state.country,
+      country: this.state.cityCountry,
       from: this.state.from,
       duration: this.state.duration,
       uploadedPics: this.state.uploadedPics,
-      location: advPlaceData,
+      location: this.state.cityName,
       ecoLabel: this.state.ecoLabel
     };
-    console.log("advData", advData);
     this.props.addAdventure(advData, this.props.history);
   }
 
@@ -137,6 +142,16 @@ class AddAdventure extends React.Component {
     } else {
       this.setState({ recurring: false });
     }
+  }
+
+  handleCity(o) {
+    this.setState({
+      cityName: o.suggestion.name,
+      cityLat: o.suggestion.latlng.lat,
+      cityLng: o.suggestion.latlng.lng,
+      cityCountry: o.suggestion.country,
+      cityPostcode: o.suggestion.postcode
+    });
   }
 
   mainActivitySelected = event => {
@@ -522,64 +537,30 @@ class AddAdventure extends React.Component {
                           {errors.level && (
                             <div style={{ color: "red" }}>{errors.level}</div>
                           )}
-                          {/* Choix du pays */}
-                          <FormControl
-                            fullWidth
-                            className={classes.selectFormControl}
+                          <br />
+                          <br />
+                          <p
+                            style={{
+                              padding: "12px 0 7px",
+                              fontSize: "0.85rem",
+                              fontWeight: "400",
+                              lineHeight: "1.42857",
+                              textDecoration: "none",
+                              textTransform: "uppercase",
+                              color: "#3C4858",
+                              letterSpacing: "0"
+                            }}
                           >
-                            <InputLabel
-                              htmlFor="simple-select"
-                              className={classes.selectLabel}
-                              style={{ fontSize: "14px" }}
-                            >
-                              Pays
-                            </InputLabel>
-                            <Select
-                              MenuProps={{
-                                className: classes.selectMenu
-                              }}
-                              classes={{
-                                select: classes.select
-                              }}
-                              style={{ fontSize: "14px" }}
-                              value={this.state.country}
-                              onChange={this.countrySelected}
-                            >
-                              {countriesSelect.map(item => (
-                                <MenuItem
-                                  value={item.name}
-                                  key={item.name}
-                                  classes={{
-                                    root: classes.selectMenuItem,
-                                    selected: classes.selectMenuItemSelected
-                                  }}
-                                  style={{ fontSize: "12px" }}
-                                >
-                                  {item.name}
-                                </MenuItem>
-                              ))}
-                            </Select>
-                          </FormControl>
-                          <br />
-                          <br />
-                          <p>Lieu / Lieu de départ de l'aventure</p>
-                          <GoogleComponent
-                            formControlProps={{
-                              fullWidth: true,
-                              className: classes.customFormControlClasses
-                            }}
-                            apiKey={API_KEY}
-                            language={"fr"}
-                            // country={'country:fr'}
-                            coordinates={true}
-                            // locationBoxStyle={'custom-style'}
-                            // locationListStyle={'custom-style-list'}
-                            onChange={e => {
-                              this.setState({ place: e });
-                            }}
-                            // onChange = {this.onChange}
-                            // name = "place"
-                            // value= {this.state.place}
+                            Lieu / Lieu de départ de l'aventure
+                          </p>
+                          <Place
+                            id="location"
+                            type="city"
+                            appId="plPMSCRAI5KI"
+                            apiKey="ccc2d1c1fea0b91859b497137b714aee"
+                            placeholder="Saisissez la ville"
+                            onChange={o => this.handleCity(o)}
+                            language="fr"
                           />
                           {errors.location && (
                             <div style={{ color: "red" }}>
@@ -759,6 +740,7 @@ class AddAdventure extends React.Component {
                           <FormControl fullWidth>
                             <Datetime
                               timeFormat={false}
+                              dateFormat="DD/MM/YYYY"
                               inputProps={{
                                 placeholder: "Date de l'aventure prévue",
                                 name: "from"

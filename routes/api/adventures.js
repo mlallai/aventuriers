@@ -148,8 +148,7 @@ router.post(
     if (req.body.requiredPeople)
       adventureFields.requiredPeople = req.body.requiredPeople;
     if (req.body.country) adventureFields.country = req.body.country;
-    if (req.body.location)
-      adventureFields.location = req.body.location.place.split(",")[0];
+    if (req.body.location) adventureFields.location = req.body.location;
     if (req.body.from) adventureFields.from = req.body.from;
     if (req.body.duration) adventureFields.duration = req.body.duration;
     // Pictures
