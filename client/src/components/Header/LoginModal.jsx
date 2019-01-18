@@ -1,10 +1,10 @@
 import React from "react";
-import PropTypes from 'prop-types';
-import { connect } from  'react-redux';
-import {withRouter} from 'react-router-dom'
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import { withRouter } from "react-router-dom";
 
-import { loginUser } from '../../actions/authActions';
-import { Link } from 'react-router-dom';
+import { loginUser } from "../../actions/authActions";
+import { Link } from "react-router-dom";
 // @material-ui/core components
 import withStyles from "@material-ui/core/styles/withStyles";
 import Slide from "@material-ui/core/Slide";
@@ -50,8 +50,8 @@ class LoginModal extends React.Component {
       openBottom: false,
       openRight: false,
       checked: [],
-      email: '',
-      password: '',
+      email: "",
+      password: "",
       errors: {}
     };
     this.handleToggle = this.handleToggle.bind(this);
@@ -62,32 +62,32 @@ class LoginModal extends React.Component {
   componentDidMount() {
     // Check to see if we are already logged in
     if (this.props.auth.isAuthenticated) {
-      this.props.history.push('/')
+      this.props.history.push("/");
     }
   }
 
   componentWillReceiveProps(nextProps) {
-    if(nextProps.errors){
-      this.setState({errors: nextProps.errors})
-     }
+    if (nextProps.errors) {
+      this.setState({ errors: nextProps.errors });
+    }
 
     if (nextProps.auth.isAuthenticated) {
-      this.props.history.push('/profile');
+      this.props.history.push("/profile");
     }
   }
 
   onChange(e) {
-    this.setState({[e.target.name]: e.target.value})
+    this.setState({ [e.target.name]: e.target.value });
   }
 
-  onSubmit = (e) => {
-    e.preventDefault()
-     const userData = {
+  onSubmit = e => {
+    e.preventDefault();
+    const userData = {
       email: this.state.email,
       password: this.state.password
-    }
+    };
     this.props.loginUser(userData);
-  }
+  };
 
   handleToggle(value) {
     const { checked } = this.state;
@@ -130,14 +130,14 @@ class LoginModal extends React.Component {
 
     return (
       <div
-        // className={`${classes.section} cd-section`}
-        // id="javascriptComponents"
+      // className={`${classes.section} cd-section`}
+      // id="javascriptComponents"
       >
         {/* <div className={classes.container}> */}
-          {/* <div className={classes.title}>
+        {/* <div className={classes.title}>
             <h2>Javascript components</h2>
           </div> */}
-          {/* <GridContainer>
+        {/* <GridContainer>
             <GridItem xs={12} sm={6} md={6}>
               <div className={classes.title}>
                 <h3>Modal</h3>
@@ -212,16 +212,16 @@ class LoginModal extends React.Component {
                   </Dialog>
                 </GridItem>
                 <GridItem xs={12} sm={6} md={6} lg={4}> */}
-                  {/* BUTTON NOTICE MODAL */}
-                  {/* <Button
+        {/* BUTTON NOTICE MODAL */}
+        {/* <Button
                     block
                     round
                     onClick={() => this.handleClickOpen("noticeModal")}
                   >
                     <Icon>info_outline</Icon> Notice
                   </Button> */}
-                  {/* NOTICE MODAL START */}
-                  {/* <Dialog
+        {/* NOTICE MODAL START */}
+        {/* <Dialog
                     classes={{
                       root: classes.modalRoot,
                       paper: classes.modal
@@ -305,19 +305,19 @@ class LoginModal extends React.Component {
                       </Button>
                     </DialogActions>
                   </Dialog> */}
-                  {/* NOTICE MODAL END */}
-                {/* </GridItem>
+        {/* NOTICE MODAL END */}
+        {/* </GridItem>
                 <GridItem xs={12} sm={6} md={6} lg={4}> */}
-                  {/* BUTTON SMALL MODAL */}
-                  {/* <Button
+        {/* BUTTON SMALL MODAL */}
+        {/* <Button
                     block
                     round
                     onClick={() => this.handleClickOpen("smallModal")}
                   >
                     <Notifications /> Small Alert
                   </Button> */}
-                  {/* SMALL MODAL START */}
-                  {/* <Dialog
+        {/* SMALL MODAL START */}
+        {/* <Dialog
                     classes={{
                       root: classes.modalRoot,
                       paper: classes.modal + " " + classes.modalSmall
@@ -379,58 +379,57 @@ class LoginModal extends React.Component {
                       </Button>
                     </DialogActions>
                   </Dialog> */}
-                  {/* SMALL MODAL END */}
-                {/* </GridItem>
+        {/* SMALL MODAL END */}
+        {/* </GridItem>
               </GridContainer>
               <GridContainer>
                 <GridItem xs={12} sm={6} md={6} lg={6}> */}
-                  {/* BUTTON LOGIN MODAL */}
-                  <Button
-                  color = "warning"
-                    block
-                    round
-                    onClick={() => this.handleClickOpen("loginModal")}
-                  >
-                    <AccountCircle style={{color: 'black'}} /> <span style={{color: 'black'}}>SE CONNECTER</span>
-                  </Button>
-                  {/* LOGIN MODAL START */}
-                  <Dialog
-                    classes={{
-                      root: classes.modalRoot,
-                      paper: classes.modal + " " + classes.modalLogin
-                    }}
-                    open={this.state.loginModal}
-                    TransitionComponent={Transition}
-                    keepMounted
-                    onClose={() => this.handleClose("loginModal")}
-                    aria-labelledby="login-modal-slide-title"
-                    aria-describedby="login-modal-slide-description"
-                  >
-                    <Card plain className={classes.modalLoginCard}>
-                      <DialogTitle
-                        id="login-modal-slide-title"
-                        disableTypography
-                        className={classes.modalHeader}
-                      >
-                        <CardHeader
-                          plain
-                          color="info"
-                          className={`${classes.textCenter} ${
-                            classes.cardLoginHeader
-                          }`}
-                        >
-                          <Button
-                            simple
-                            className={classes.modalCloseButton}
-                            key="close"
-                            aria-label="Close"
-                            onClick={() => this.handleClose("loginModal")}
-                          >
-                            {" "}
-                            <Close className={classes.modalClose} />
-                          </Button>
-                          <h5 className={classes.cardTitleWhite}>Connexion</h5>
-                          {/* <div className={classes.socialLine}>
+        {/* BUTTON LOGIN MODAL */}
+        <Button
+          color="warning"
+          block
+          round
+          onClick={() => this.handleClickOpen("loginModal")}
+        >
+          <AccountCircle style={{ color: "black" }} />{" "}
+          <span style={{ color: "black" }}>SE CONNECTER</span>
+        </Button>
+        {/* LOGIN MODAL START */}
+        <Dialog
+          classes={{
+            root: classes.modalRoot,
+            paper: classes.modal + " " + classes.modalLogin
+          }}
+          open={this.state.loginModal}
+          TransitionComponent={Transition}
+          keepMounted
+          onClose={() => this.handleClose("loginModal")}
+          aria-labelledby="login-modal-slide-title"
+          aria-describedby="login-modal-slide-description"
+        >
+          <Card plain className={classes.modalLoginCard}>
+            <DialogTitle
+              id="login-modal-slide-title"
+              disableTypography
+              className={classes.modalHeader}
+            >
+              <CardHeader
+                plain
+                color="info"
+                className={`${classes.textCenter} ${classes.cardLoginHeader}`}
+              >
+                <Button
+                  simple
+                  className={classes.modalCloseButton}
+                  key="close"
+                  aria-label="Close"
+                  onClick={() => this.handleClose("loginModal")}
+                >
+                  {" "}
+                  <Close className={classes.modalClose} />
+                </Button>
+                <h5 className={classes.cardTitleWhite}>Connexion</h5>
+                {/* <div className={classes.socialLine}>
                             <Button
                               justIcon
                               link
@@ -453,22 +452,26 @@ class LoginModal extends React.Component {
                               <i className="fab fa-google-plus-g" />
                             </Button>
                           </div> */}
-                        </CardHeader>
-                      </DialogTitle>
-                      <DialogContent
-                        id="login-modal-slide-description"
-                        className={classes.modalBody}
-                      >
-                        <form onSubmit={this.onSubmit}>
-                          <p
-                            className={`${classes.description} ${
-                              classes.textCenter
-                            }`}
-                          >
-                            Vous n'avez pas encore de compte ? Inscrivez-vous <Link to="/register"> <span style={{color: '#2a8afa', textTransform: 'uppercase'}}>ici.</span></Link>
-                          </p>
-                          <CardBody className={classes.cardLoginBody}>
-                            {/* <CustomInput
+              </CardHeader>
+            </DialogTitle>
+            <DialogContent
+              id="login-modal-slide-description"
+              className={classes.modalBody}
+            >
+              <form onSubmit={this.onSubmit}>
+                <p className={`${classes.description} ${classes.textCenter}`}>
+                  Vous n'avez pas encore de compte ? Inscrivez-vous{" "}
+                  <Link to="/register">
+                    {" "}
+                    <span
+                      style={{ color: "#2a8afa", textTransform: "uppercase" }}
+                    >
+                      ici.
+                    </span>
+                  </Link>
+                </p>
+                <CardBody className={classes.cardLoginBody}>
+                  {/* <CustomInput
                               id="login-modal-first"
                               formControlProps={{
                                 fullWidth: true
@@ -482,77 +485,82 @@ class LoginModal extends React.Component {
                                 placeholder: "First Name..."
                               }}
                             /> */}
-                            <CustomInput
-                              id="login-modal-email"
-                              formControlProps={{
-                                fullWidth: true
-                              }}
-                              inputProps={{
-                                startAdornment: (
-                                  <InputAdornment position="start">
-                                    <Mail className={classes.icon} />
-                                  </InputAdornment>
-                                ),
-                                placeholder: "Email...",
-                                name:"email",
-                                value: this.state.email,
-                                onChange: this.onChange
-                              }}
-                            />
-                          {errors.email && (<div style={{color: 'red'}}>{errors.email}</div>)}
-                            <CustomInput
-                              id="login-modal-pass"
-                              formControlProps={{
-                                fullWidth: true
-                              }}
-                              inputProps={{
-                                startAdornment: (
-                                  <InputAdornment position="start">
-                                    <Icon className={classes.icon}>
-                                      lock_outline
-                                    </Icon>
-                                  </InputAdornment>
-                                ),
-                                placeholder: "Mot de passe...",
-                                name:"password",
-                                value: this.state.password,
-                                onChange: this.onChange,
-                                type: 'password'
-                              }}
-                            />
-                            {errors.password && (<div style={{color: 'red'}}>{errors.password}</div>)}
-                          </CardBody>
-                          <div style={{textAlign: 'center'}}>
-                          <Button type="submit" round color="warning">
-                              <span style={{color: 'black'}}>Je me connecte</span>
-                            </Button>
-                          </div>
-                        </form>
-                        <div style={{textAlign: 'center', marginBottom: '10px'}}>
-                        <Link to="/forgot-password"><span style={{color: '#2a8afa'}}>Mot de passe oublié ?</span></Link>
-                        </div>
-                      </DialogContent>
-                      <DialogActions
-                        className={`${classes.modalFooter} ${
-                          classes.justifyContentCenter
-                        }`}
-                      >
-                      </DialogActions>
-                    </Card>
-                  </Dialog>
-                  {/* LOGIN MODAL END */}
-                {/* </GridItem>
+                  <CustomInput
+                    id="login-modal-email"
+                    formControlProps={{
+                      fullWidth: true
+                    }}
+                    inputProps={{
+                      startAdornment: (
+                        <InputAdornment position="start">
+                          <Mail className={classes.icon} />
+                        </InputAdornment>
+                      ),
+                      placeholder: "Email...",
+                      name: "email",
+                      value: this.state.email,
+                      onChange: this.onChange
+                    }}
+                  />
+                  {errors.email && (
+                    <div style={{ color: "red" }}>{errors.email}</div>
+                  )}
+                  <CustomInput
+                    id="login-modal-pass"
+                    formControlProps={{
+                      fullWidth: true
+                    }}
+                    inputProps={{
+                      startAdornment: (
+                        <InputAdornment position="start">
+                          <Icon className={classes.icon}>lock_outline</Icon>
+                        </InputAdornment>
+                      ),
+                      placeholder: "Mot de passe...",
+                      name: "password",
+                      value: this.state.password,
+                      onChange: this.onChange,
+                      type: "password"
+                    }}
+                  />
+                  {errors.password && (
+                    <div style={{ color: "red" }}>{errors.password}</div>
+                  )}
+                </CardBody>
+                <div style={{ textAlign: "center" }}>
+                  <Button type="submit" round color="warning">
+                    <span style={{ color: "black" }}>Je me connecte</span>
+                  </Button>
+                </div>
+              </form>
+              <div style={{ textAlign: "center", marginBottom: "10px" }}>
+                <Link to="/forgot-password">
+                  <span style={{ color: "#2a8afa" }}>
+                    Mot de passe oublié ?
+                  </span>
+                </Link>
+              </div>
+            </DialogContent>
+            <DialogActions
+              className={`${classes.modalFooter} ${
+                classes.justifyContentCenter
+              }`}
+            />
+          </Card>
+        </Dialog>
+        {/* LOGIN MODAL END */}
+        {/* </GridItem>
                 <GridItem xs={12} sm={6} md={6} lg={6}> */}
-                  {/* BUTTON SIGNUP MODAL */}
-                  {/* <Button
+        {/* BUTTON SIGNUP MODAL */}
+        {/* <Button
                     block
                     round
                     onClick={() => this.handleClickOpen("signupModal")}
                   >
                     <Assignment /> Signup
                   </Button> */}
-                  {/* SIGNUP MODAL START */}
-                  {/* <Dialog
+        {/* SIGNUP MODAL START */}
+        {/* <Dialog
                     classes={{
                       root: classes.modalRoot,
                       paper: classes.modal + " " + classes.modalSignup
@@ -761,8 +769,8 @@ class LoginModal extends React.Component {
                       </DialogContent>
                     </Card>
                   </Dialog> */}
-                  {/* SIGNUP MODAL END */}
-                {/* </GridItem>
+        {/* SIGNUP MODAL END */}
+        {/* </GridItem>
               </GridContainer>
               <GridItem xs={12} sm={12} md={12}>
                 <div className={classes.title}>
@@ -996,9 +1004,9 @@ class LoginModal extends React.Component {
                 />
               </GridItem>
             </GridContainer> */}
-          {/* </div> */}
-          {/* <div className={classes.space50} /> */}
-          {/* <div id="file-uploader">
+        {/* </div> */}
+        {/* <div className={classes.space50} /> */}
+        {/* <div id="file-uploader">
             <div className={classes.title}>
               <h3>File Uploader</h3>
             </div>
@@ -1068,7 +1076,7 @@ class LoginModal extends React.Component {
               </GridItem>
             </GridContainer>
           </div> */}
-          {/* <div className={classes.title}>
+        {/* <div className={classes.title}>
             <h3>Carousel</h3>
           </div> */}
         {/* </div> */}
@@ -1082,10 +1090,12 @@ LoginModal.propTypes = {
   auth: PropTypes.object.isRequired,
   errors: PropTypes.object.isRequired
 };
- const mapStateToProps = state => ({
+const mapStateToProps = state => ({
   auth: state.auth,
   errors: state.errors
 });
 
-export default connect(mapStateToProps, { loginUser })(withStyles(javascriptStyles)(withRouter(LoginModal)));
-
+export default connect(
+  mapStateToProps,
+  { loginUser }
+)(withStyles(javascriptStyles)(withRouter(LoginModal)));

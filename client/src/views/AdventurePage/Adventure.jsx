@@ -322,7 +322,17 @@ class Adventure extends React.Component {
         // className={classNames(classes.main, classes.mainRaised)}
         >
           <GridContainer>
-            <GridItem md={12} sm={12}>
+            <GridItem
+              md={12}
+              sm={12}
+              style={{
+                justifyContent: "center",
+                padding: "10px",
+                margin: "10px",
+                border: "1px solid rgba(232, 236, 241, 1)",
+                borderRadius: "8px"
+              }}
+            >
               <GridContainer
                 style={{ alignItems: "center", justifyContent: "center" }}
               >
@@ -363,7 +373,7 @@ class Adventure extends React.Component {
               </GridContainer>
               <GridContainer style={{ justifyContent: "center" }}>
                 {loadedProfile.desc ? (
-                  <GridItem xs={12}>
+                  <GridItem xs={12} style={{ textAlign: "center" }}>
                     <p>
                       Bio:{" "}
                       <span style={{ fontStyle: "italic" }}>
@@ -376,7 +386,13 @@ class Adventure extends React.Component {
                 )}
               </GridContainer>
               <GridContainer style={{ justifyContent: "center" }}>
-                <div style={{ margin: "0px", justifyContent: "center" }}>
+                <div
+                  style={{
+                    marginLeft: "10px",
+                    marginRight: "10px",
+                    justifyContent: "center"
+                  }}
+                >
                   {profileSports}
                 </div>
               </GridContainer>
@@ -493,7 +509,9 @@ class Adventure extends React.Component {
         // className={classNames(classes.main, classes.mainRaised)}
         >
           <GridContainer>
-            <h2 className={classes.title}>{loadedAdventure.title}</h2>
+            <h2 style={{ marginLeft: "10px" }} className={classes.title}>
+              {loadedAdventure.title}
+            </h2>
           </GridContainer>
           <br />
           <GridContainer
@@ -807,13 +825,13 @@ class Adventure extends React.Component {
               <GridItem xs={12} sm={12} md={3}>
                 {/* <div className={classes.container}> */}
                 <GridContainer
-                  style={{
-                    justifyContent: "center",
-                    padding: "10px",
-                    margin: "10px",
-                    border: "1px solid rgba(232, 236, 241, 1)",
-                    borderRadius: "8px"
-                  }}
+                // style={{
+                //   justifyContent: "center",
+                //   padding: "10px",
+                //   margin: "10px",
+                //   border: "1px solid rgba(232, 236, 241, 1)",
+                //   borderRadius: "8px"
+                // }}
                 >
                   {profileContent}
                 </GridContainer>
