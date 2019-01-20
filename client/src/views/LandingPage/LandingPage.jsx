@@ -24,7 +24,7 @@ import Button from "components/CustomButtons/Button.jsx";
 import HeaderLinks from "components/Header/HeaderLinks.jsx";
 import HeaderLinksAuth from "components/Header/HeaderLinksAuth.jsx";
 import Parallax from "components/Parallax/Parallax.jsx";
-import SectionPreFooter from "views/ComponentsPage/Sections/SectionPreFooter.jsx";
+import SectionPreFooter1 from "views/ComponentsPage/Sections/SectionPreFooter1.jsx";
 import Card from "components/Card/Card.jsx";
 import CardBody from "components/Card/CardBody.jsx";
 import CardHeader from "components/Card/CardHeader.jsx";
@@ -385,7 +385,7 @@ class LandingPage extends React.Component {
                 </Card>
               </GridItem>
             </GridContainer>
-            <SectionPreFooter />
+            <SectionPreFooter1 />
           </div>
         </div>
         <Footer

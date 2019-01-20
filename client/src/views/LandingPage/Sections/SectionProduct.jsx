@@ -22,7 +22,9 @@ class SectionProduct extends React.Component {
           <GridItem xs={12} sm={8} md={8}>
             <h2 className={classes.title}>Le site des éco-aventuriers</h2>
             <h5 className={classes.description}>
-              Adventurer est la plateforme dédiée à l'éco-aventure. Trouvez votre prochain partenaire d'aventure et votre matériel sur le site.
+              Adventurer est la plateforme dédiée à l'éco-aventure. Trouvez
+              votre prochain partenaire d'aventure et votre matériel sur le
+              site.
             </h5>
           </GridItem>
         </GridContainer>

@@ -223,6 +223,7 @@ class AddAdventure extends React.Component {
         `https://api.cloudinary.com/v1_1/${config_cloud_name}/image/upload/`,
         {
           method: "POST",
+          mode: "cors",
           body: formData
         }
       )
