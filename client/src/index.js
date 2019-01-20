@@ -25,6 +25,8 @@ import Register from "views/auth/Register.jsx";
 import ForgotPassword from "views/auth/ForgotPassword.jsx";
 import ResetPassword from "views/auth/ResetPassword.jsx";
 import EmailSent from "views/auth/EmailSent.jsx";
+import PrivatePolicy1 from "views/LandingPage/Sections/PrivatePolicy1.jsx";
+import Terms from "views/LandingPage/Sections/Terms.jsx";
 
 import PrivateRoute from "./components/common/PrivateRoute";
 
@@ -99,6 +101,8 @@ ReactDOM.render(
         </Switch>
         <Route exact path="/adventures" component={Adventures} />
         <Route exact path="/adventure/:id" component={Adventure} />
+        <Route exact path="/private-policy" component={PrivatePolicy1} />
+        <Route exact path="/terms" component={Terms} />
       </div>
     </Router>
   </Provider>,
