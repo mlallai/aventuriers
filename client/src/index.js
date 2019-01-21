@@ -20,6 +20,7 @@ import Adventures from "views/AdventurePage/Adventures.jsx";
 import Adventure from "views/AdventurePage/Adventure.jsx";
 import Message from "views/ProfilePage/Message.jsx";
 import MessagePage from "views/ProfilePage/MessagePage.jsx";
+// import Test from "Test.jsx";
 
 import Register from "views/auth/Register.jsx";
 import ForgotPassword from "views/auth/ForgotPassword.jsx";
@@ -27,6 +28,7 @@ import ResetPassword from "views/auth/ResetPassword.jsx";
 import EmailSent from "views/auth/EmailSent.jsx";
 import PrivatePolicy1 from "views/LandingPage/Sections/PrivatePolicy1.jsx";
 import Terms from "views/LandingPage/Sections/Terms.jsx";
+import Contact from "views/LandingPage/Sections/Contact.jsx";
 
 import PrivateRoute from "./components/common/PrivateRoute";
 
@@ -103,6 +105,8 @@ ReactDOM.render(
         <Route exact path="/adventure/:id" component={Adventure} />
         <Route exact path="/private-policy" component={PrivatePolicy1} />
         <Route exact path="/terms" component={Terms} />
+        <Route exact path="/contact" component={Contact} />
+        {/* <Route exact path="/test" component={Test} /> */}
       </div>
     </Router>
   </Provider>,

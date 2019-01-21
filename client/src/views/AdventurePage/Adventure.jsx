@@ -12,6 +12,7 @@ import { addMessage } from "../../actions/messageActions";
 import Moment from "react-moment";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Carousel } from "react-responsive-carousel";
+import FooterBar from "views/Footer/FooterBar.jsx";
 
 // @material-ui/core components
 import Avatar from "@material-ui/core/Avatar";
@@ -846,40 +847,7 @@ class Adventure extends React.Component {
             </GridContainer>
           </div>
         </div>
-        <Footer
-          content={
-            <div>
-              <div className={classes.left}>
-                <List className={classes.list}>
-                  <ListItem className={classes.inlineBlock}>
-                    <a href="/" className={classes.block}>
-                      Adventurer
-                    </a>
-                  </ListItem>
-                  <ListItem className={classes.inlineBlock}>
-                    <a href="#" className={classes.block}>
-                      About us
-                    </a>
-                  </ListItem>
-                  <ListItem className={classes.inlineBlock}>
-                    <a
-                      href="https://medium.com/adventurerapp"
-                      target="_blank"
-                      className={classes.block}
-                    >
-                      Blog
-                    </a>
-                  </ListItem>
-                </List>
-              </div>
-              <div className={classes.right} style={{ fontSize: "14px" }}>
-                &copy; {1900 + new Date().getYear()} , made with{" "}
-                <Favorite style={{ color: "green" }} className={classes.icon} />{" "}
-                by Adventurer, for an ethical outdoor world.
-              </div>
-            </div>
-          }
-        />
+        <FooterBar />
       </div>
     );
   }

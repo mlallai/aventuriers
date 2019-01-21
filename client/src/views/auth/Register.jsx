@@ -1,9 +1,9 @@
 import React from "react";
-import classnames from 'classnames';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import { registerUser } from '../../actions/authActions';
-import {withRouter} from 'react-router-dom'
+import classnames from "classnames";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import { registerUser } from "../../actions/authActions";
+import { withRouter } from "react-router-dom";
 
 // @material-ui/core components
 import withStyles from "@material-ui/core/styles/withStyles";
@@ -30,19 +30,17 @@ import signupPageStyle from "assets/jss/material-kit-pro-react/views/signupPageS
 
 import image from "assets/img/mountain.jpg";
 
-
 const dashboardRoutes = [];
-
 
 class Register extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       checked: [1],
-      firstName: '',
-      lastName: '',
-      email: '',
-      password: '',
+      firstName: "",
+      lastName: "",
+      email: "",
+      password: "",
       errors: {}
     };
     this.handleToggle = this.handleToggle.bind(this);
@@ -54,33 +52,31 @@ class Register extends React.Component {
     window.scrollTo(0, 0);
     document.body.scrollTop = 0;
     if (this.props.auth.isAuthenticated) {
-      this.props.history.push('/')
+      this.props.history.push("/");
     }
   }
 
   componentWillReceiveProps(nextProps) {
-    if(nextProps.errors){
-     this.setState({errors: nextProps.errors})
+    if (nextProps.errors) {
+      this.setState({ errors: nextProps.errors });
     }
   }
 
-
   onChange(e) {
-    this.setState({[e.target.name]: e.target.value})
+    this.setState({ [e.target.name]: e.target.value });
   }
 
   onSubmit(e) {
-    e.preventDefault()
+    e.preventDefault();
 
     const newUser = {
       firstName: this.state.firstName,
       lastName: this.state.lastName,
       email: this.state.email,
-      password: this.state.password,
-    }
-    console.log("newUser",newUser)
+      password: this.state.password
+    };
+    console.log("newUser", newUser);
     this.props.registerUser(newUser, this.props.history);
-
   }
 
   handleToggle(value) {
@@ -132,7 +128,11 @@ class Register extends React.Component {
                   <CardBody>
                     <GridContainer justify="center">
                       <GridItem xs={12} sm={5} md={5}>
-                        <form className={classes.form} onValidate onSubmit={this.onSubmit}>
+                        <form
+                          className={classes.form}
+                          onValidate
+                          onSubmit={this.onSubmit}
+                        >
                           <CustomInput
                             formControlProps={{
                               fullWidth: true,
@@ -143,10 +143,11 @@ class Register extends React.Component {
                                 <InputAdornment
                                   position="start"
                                   // className={classes.inputAdornment}
-                                  className={classnames(classes.inputAdornment,
-                                  //    {
-                                  //   'is-invalid': errors.name
-                                  // }
+                                  className={classnames(
+                                    classes.inputAdornment
+                                    //    {
+                                    //   'is-invalid': errors.name
+                                    // }
                                   )}
                                 >
                                   <Face
@@ -154,13 +155,17 @@ class Register extends React.Component {
                                   />
                                 </InputAdornment>
                               ),
-                            placeholder: "Prénom...",
-                            onChange:this.onChange,
-                            name: "firstName",
-                            value:this.state.firstName
+                              placeholder: "Prénom...",
+                              onChange: this.onChange,
+                              name: "firstName",
+                              value: this.state.firstName
                             }}
                           />
-                          {errors.firstName && (<div style={{color: 'red'}}>{errors.firstName}</div>)}
+                          {errors.firstName && (
+                            <div style={{ color: "red" }}>
+                              {errors.firstName}
+                            </div>
+                          )}
                           <CustomInput
                             formControlProps={{
                               fullWidth: true,
@@ -177,13 +182,17 @@ class Register extends React.Component {
                                   />
                                 </InputAdornment>
                               ),
-                            placeholder: "Nom...",
-                            onChange:this.onChange,
-                            name: "lastName",
-                            value:this.state.lastName
+                              placeholder: "Nom...",
+                              onChange: this.onChange,
+                              name: "lastName",
+                              value: this.state.lastName
                             }}
                           />
-                          {errors.lastName && (<div style={{color: 'red'}}>{errors.lastName}</div>)}
+                          {errors.lastName && (
+                            <div style={{ color: "red" }}>
+                              {errors.lastName}
+                            </div>
+                          )}
                           <CustomInput
                             formControlProps={{
                               fullWidth: true,
@@ -200,13 +209,15 @@ class Register extends React.Component {
                                   />
                                 </InputAdornment>
                               ),
-                            placeholder: "Email...",
-                            onChange:this.onChange,
-                            name: "email",
-                            value:this.state.email
+                              placeholder: "Email...",
+                              onChange: this.onChange,
+                              name: "email",
+                              value: this.state.email
                             }}
                           />
-                          {errors.email && (<div style={{color: 'red'}}>{errors.email}</div>)}
+                          {errors.email && (
+                            <div style={{ color: "red" }}>{errors.email}</div>
+                          )}
                           <CustomInput
                             formControlProps={{
                               fullWidth: true,
@@ -223,14 +234,18 @@ class Register extends React.Component {
                                   </Icon>
                                 </InputAdornment>
                               ),
-                            placeholder: "Password...",
-                            onChange:this.onChange,
-                            name: "password",
-                            value:this.state.password,
-                            type: "password"
+                              placeholder: "Password...",
+                              onChange: this.onChange,
+                              name: "password",
+                              value: this.state.password,
+                              type: "password"
                             }}
                           />
-                          {errors.password && (<div style={{color: 'red'}}>{errors.password}</div>)}
+                          {errors.password && (
+                            <div style={{ color: "red" }}>
+                              {errors.password}
+                            </div>
+                          )}
                           {/* <FormControlLabel
                             classes={{
                               label: classes.label
@@ -265,7 +280,9 @@ class Register extends React.Component {
                           /> */}
                           <div className={classes.textCenter}>
                             <Button type="submit" round color="warning">
-                              <span style={{color: 'black'}}>C'est parti</span>
+                              <span style={{ color: "black" }}>
+                                C'est parti
+                              </span>
                             </Button>
                           </div>
                         </form>
@@ -282,18 +299,12 @@ class Register extends React.Component {
                 <div className={classes.left}>
                   <List className={classes.list}>
                     <ListItem className={classes.inlineBlock}>
-                      <a
-                        href="/"
-                        className={classes.block}
-                      >
+                      <a href="/" className={classes.block}>
                         Adventurer
                       </a>
                     </ListItem>
                     <ListItem className={classes.inlineBlock}>
-                      <a
-                        href="#"
-                        className={classes.block}
-                      >
+                      <a href="#" className={classes.block}>
                         About us
                       </a>
                     </ListItem>
@@ -308,11 +319,13 @@ class Register extends React.Component {
                     </ListItem>
                   </List>
                 </div>
-                <div className={classes.right} style={{fontSize: '14px'}}>
+                <div className={classes.right} style={{ fontSize: "14px" }}>
                   &copy; {1900 + new Date().getYear()} , made with{" "}
-                  <Favorite style={{color: 'green'}} className={classes.icon} /> by{" "}
-                  Adventurer, for an
-                  ethical outdoor world.
+                  <Favorite
+                    style={{ color: "green" }}
+                    className={classes.icon}
+                  />{" "}
+                  by Adventurer, for an ethical outdoor world.
                 </div>
               </div>
             }
@@ -327,14 +340,16 @@ Register.propTypes = {
   registerUser: PropTypes.func.isRequired,
   auth: PropTypes.object.isRequired,
   errors: PropTypes.object.isRequired
-}
- const mapStateToProps = (state) => ({
+};
+const mapStateToProps = state => ({
   auth: state.auth,
   errors: state.errors
-})
+});
 
-export default connect(mapStateToProps, { registerUser })(withStyles(signupPageStyle)(withRouter(Register)));
-
+export default connect(
+  mapStateToProps,
+  { registerUser }
+)(withStyles(signupPageStyle)(withRouter(Register)));
 
 // export default connect(mapStateToProps, { registerUser })(Register);
 // export default withStyles(signupPageStyle);

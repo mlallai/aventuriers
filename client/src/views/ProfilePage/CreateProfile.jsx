@@ -1,16 +1,17 @@
 import React from "react";
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import {withRouter} from 'react-router-dom'
-import { getCurrentProfile, createProfile } from '../../actions/profileActions';
-import isEmpty from 'validation/isEmpty.js';
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import { withRouter } from "react-router-dom";
+import { getCurrentProfile, createProfile } from "../../actions/profileActions";
+import isEmpty from "validation/isEmpty.js";
 import TagsInput from "react-tagsinput";
+import FooterBar from "views/Footer/FooterBar.jsx";
 
 // @material-ui/core components
 import withStyles from "@material-ui/core/styles/withStyles";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
-import TextField from '@material-ui/core/TextField';
+import TextField from "@material-ui/core/TextField";
 
 // @material-ui/icons
 import Favorite from "@material-ui/icons/Favorite";
@@ -31,26 +32,23 @@ import signupPageStyle from "assets/jss/material-kit-pro-react/views/signupPageS
 
 import image from "assets/img/mountain.jpg";
 
-
 const dashboardRoutes = [];
-
 
 class CreateProfile extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-        age: '',
-        desc: '',
-        country: '',
-        location:'',
-        sports: '',
-        website: '',
-        facebook: '',
-        instagram: '',
-        youtube: '',
-        errors: {},
-        tags: ["Randonnée"]
-
+      age: "",
+      desc: "",
+      country: "",
+      location: "",
+      sports: "",
+      website: "",
+      facebook: "",
+      instagram: "",
+      youtube: "",
+      errors: {},
+      tags: ["Randonnée"]
     };
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
@@ -65,21 +63,21 @@ class CreateProfile extends React.Component {
       this.setState({ errors: nextProps.errors });
     }
     if (nextProps.profile.profile) {
-        const profile = nextProps.profile.profile;
+      const profile = nextProps.profile.profile;
 
-    // If profile field doesnt exist, make empty string
-    profile.age = !isEmpty(profile.age) ? profile.age : '';
-    profile.desc = !isEmpty(profile.desc) ? profile.desc : '';
-    profile.country = !isEmpty(profile.country) ? profile.country : '';
-    profile.location = !isEmpty(profile.location) ? profile.location : '';
-    profile.sports = !isEmpty(profile.sports) ? profile.sports : '';
-    profile.website = !isEmpty(profile.website) ? profile.website : '';
-    profile.facebook = !isEmpty(profile.facebook) ? profile.facebook : '';
-    profile.instagram = !isEmpty(profile.instagram) ? profile.instagram : '';
-    profile.youtube = !isEmpty(profile.youtube) ? profile.youtube : '';
+      // If profile field doesnt exist, make empty string
+      profile.age = !isEmpty(profile.age) ? profile.age : "";
+      profile.desc = !isEmpty(profile.desc) ? profile.desc : "";
+      profile.country = !isEmpty(profile.country) ? profile.country : "";
+      profile.location = !isEmpty(profile.location) ? profile.location : "";
+      profile.sports = !isEmpty(profile.sports) ? profile.sports : "";
+      profile.website = !isEmpty(profile.website) ? profile.website : "";
+      profile.facebook = !isEmpty(profile.facebook) ? profile.facebook : "";
+      profile.instagram = !isEmpty(profile.instagram) ? profile.instagram : "";
+      profile.youtube = !isEmpty(profile.youtube) ? profile.youtube : "";
 
-    // Set component fields state
-    this.setState({
+      // Set component fields state
+      this.setState({
         age: profile.age,
         desc: profile.desc,
         country: profile.country,
@@ -91,16 +89,16 @@ class CreateProfile extends React.Component {
         instagram: profile.instagram
       });
     }
-}
+  }
 
-onSubmit(e) {
+  onSubmit(e) {
     e.preventDefault();
 
     const sportsData = [];
     if (sportsData) {
       this.state.tags.map(sport => {
-        sportsData.push(sport)
-      })
+        sportsData.push(sport);
+      });
     }
     const profileData = {
       age: this.state.age,
@@ -113,7 +111,7 @@ onSubmit(e) {
       youtube: this.state.youtube,
       instagram: this.state.instagram
     };
-    console.log("profileData", profileData)
+    console.log("profileData", profileData);
     this.props.createProfile(profileData, this.props.history);
   }
 
@@ -164,39 +162,41 @@ onSubmit(e) {
                 <Card className={classes.cardSignup}>
                   <h2 className={classes.cardTitle}>Créer mon profil</h2>
                   <CardBody>
-                  <form onValidate onSubmit={this.onSubmit}>
-                  <GridContainer justify="center">
-                  <GridItem xs={12} sm={12} md={12}>
-                {/* Sports */}
-                <p>Vos sports préférés</p>
-                  <TagsInput
-                    inputProps={{
-                      placeholder: "+ Ajouter",
-                      }}
-                    value={this.state.tags}
-                    onChange={this.handleTags}
-                    tagProps={{ className: "react-tagsinput-tag info" }}
-                  />
-   
-                    {/* Age */}
-                    <TextField
-                          // id="standard-number"
-                          label="Saisissez votre âge"
-                          name="age"
-                          value={ this.state.age}
-                          onChange= {this.onChange}
-                          type="number"
-                          className={classes.textField}
-                          InputLabelProps={{
-                            shrink: true,
-                          }}
-                          margin="normal"
-                          style={{width: '100%'}}
-                        />
-                         {errors.age && (<div style={{color: 'red'}}>{errors.age}</div>)}
-                {/* BIO */}
-                {/* Choix du résumé */}
-                <CustomInput
+                    <form onValidate onSubmit={this.onSubmit}>
+                      <GridContainer justify="center">
+                        <GridItem xs={12} sm={12} md={12}>
+                          {/* Sports */}
+                          <p>Vos sports préférés</p>
+                          <TagsInput
+                            inputProps={{
+                              placeholder: "+ Ajouter"
+                            }}
+                            value={this.state.tags}
+                            onChange={this.handleTags}
+                            tagProps={{ className: "react-tagsinput-tag info" }}
+                          />
+
+                          {/* Age */}
+                          <TextField
+                            // id="standard-number"
+                            label="Saisissez votre âge"
+                            name="age"
+                            value={this.state.age}
+                            onChange={this.onChange}
+                            type="number"
+                            className={classes.textField}
+                            InputLabelProps={{
+                              shrink: true
+                            }}
+                            margin="normal"
+                            style={{ width: "100%" }}
+                          />
+                          {errors.age && (
+                            <div style={{ color: "red" }}>{errors.age}</div>
+                          )}
+                          {/* BIO */}
+                          {/* Choix du résumé */}
+                          <CustomInput
                             labelText="Votre description"
                             id="textarea-input"
                             formControlProps={{
@@ -206,94 +206,60 @@ onSubmit(e) {
                               multiline: true,
                               rows: 5,
                               placeholder: "Présentez-vous...",
-                              onChange:this.onChange,
+                              onChange: this.onChange,
                               name: "desc",
-                              value:this.state.desc
+                              value: this.state.desc
                             }}
                           />
-                          {errors.desc && (<div style={{color: 'red'}}>{errors.desc}</div>)}
-                {/* pays */}
-                <CustomInput
-                            formControlProps={{
-                              fullWidth: true,
-                              className: classes.customFormControlClasses
-                            }}
-                            inputProps={{
-                            placeholder: "Pays...",
-                            onChange:this.onChange,
-                            name: "country",
-                            value:this.state.country
-                            }}
-                          />
-                          {errors.country && (<div>{errors.country}</div>)}
-                    {/* lieu */}
+                          {errors.desc && (
+                            <div style={{ color: "red" }}>{errors.desc}</div>
+                          )}
+                          {/* pays */}
                           <CustomInput
                             formControlProps={{
                               fullWidth: true,
                               className: classes.customFormControlClasses
                             }}
                             inputProps={{
-                            placeholder: "Lieu...",
-                            onChange:this.onChange,
-                            name: "location",
-                            value:this.state.location
+                              placeholder: "Pays...",
+                              onChange: this.onChange,
+                              name: "country",
+                              value: this.state.country
                             }}
                           />
-                          {errors.location && (<div style={{color: 'red'}}>{errors.location}</div>)}
-                  </GridItem>
-                  <div className={classes.textCenter}>
-                            <Button type="submit" round color="warning">
-                               Enregistrer mon profil
-                            </Button>
-                          </div>
-                  </GridContainer>
-                  </form>
+                          {errors.country && <div>{errors.country}</div>}
+                          {/* lieu */}
+                          <CustomInput
+                            formControlProps={{
+                              fullWidth: true,
+                              className: classes.customFormControlClasses
+                            }}
+                            inputProps={{
+                              placeholder: "Lieu...",
+                              onChange: this.onChange,
+                              name: "location",
+                              value: this.state.location
+                            }}
+                          />
+                          {errors.location && (
+                            <div style={{ color: "red" }}>
+                              {errors.location}
+                            </div>
+                          )}
+                        </GridItem>
+                        <div className={classes.textCenter}>
+                          <Button type="submit" round color="warning">
+                            Enregistrer mon profil
+                          </Button>
+                        </div>
+                      </GridContainer>
+                    </form>
                   </CardBody>
                 </Card>
               </GridItem>
             </GridContainer>
           </div>
-          <Footer
-            content={
-              <div>
-                <div className={classes.left}>
-                  <List className={classes.list}>
-                    <ListItem className={classes.inlineBlock}>
-                      <a
-                        href="/"
-                        className={classes.block}
-                      >
-                        Adventurer
-                      </a>
-                    </ListItem>
-                    <ListItem className={classes.inlineBlock}>
-                      <a
-                        href="#"
-                        className={classes.block}
-                      >
-                        About us
-                      </a>
-                    </ListItem>
-                    <ListItem className={classes.inlineBlock}>
-                      <a
-                        href="https://medium.com/adventurerapp"
-                        target="_blank"
-                        className={classes.block}
-                      >
-                        Blog
-                      </a>
-                    </ListItem>
-                  </List>
-                </div>
-                <div className={classes.right} style={{fontSize: '14px'}}>
-                  &copy; {1900 + new Date().getYear()} , made with{" "}
-                  <Favorite style={{color: 'green'}} className={classes.icon} /> by{" "}
-                  Adventurer, for an
-                  ethical outdoor world.
-                </div>
-              </div>
-            }
-          />
+          <FooterBar />
         </div>
       </div>
     );
@@ -301,16 +267,19 @@ onSubmit(e) {
 }
 
 CreateProfile.propTypes = {
-    createProfile: PropTypes.func.isRequired,
-    getCurrentProfile: PropTypes.func.isRequired,
-    auth: PropTypes.object.isRequired,
-    profile: PropTypes.object.isRequired,
-    errors: PropTypes.object.isRequired
-}
- const mapStateToProps = (state) => ({
-    profile: state.profile,
-    auth: state.auth,
-    errors: state.errors
-})
+  createProfile: PropTypes.func.isRequired,
+  getCurrentProfile: PropTypes.func.isRequired,
+  auth: PropTypes.object.isRequired,
+  profile: PropTypes.object.isRequired,
+  errors: PropTypes.object.isRequired
+};
+const mapStateToProps = state => ({
+  profile: state.profile,
+  auth: state.auth,
+  errors: state.errors
+});
 
-export default connect(mapStateToProps, { createProfile, getCurrentProfile })(withStyles(signupPageStyle)(withRouter(CreateProfile)));
+export default connect(
+  mapStateToProps,
+  { createProfile, getCurrentProfile }
+)(withStyles(signupPageStyle)(withRouter(CreateProfile)));

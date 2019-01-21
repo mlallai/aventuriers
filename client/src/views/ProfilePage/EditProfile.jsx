@@ -6,6 +6,7 @@ import { getCurrentProfile, createProfile } from "../../actions/profileActions";
 import isEmpty from "validation/isEmpty.js";
 import TagsInput from "react-tagsinput";
 import Place from "react-algolia-places";
+import FooterBar from "views/Footer/FooterBar.jsx";
 
 // @material-ui/core components
 import withStyles from "@material-ui/core/styles/withStyles";
@@ -251,43 +252,7 @@ class EditProfile extends React.Component {
               </GridItem>
             </GridContainer>
           </div>
-          <Footer
-            content={
-              <div>
-                <div className={classes.left}>
-                  <List className={classes.list}>
-                    <ListItem className={classes.inlineBlock}>
-                      <a href="/" className={classes.block}>
-                        Adventurer
-                      </a>
-                    </ListItem>
-                    <ListItem className={classes.inlineBlock}>
-                      <a href="#" className={classes.block}>
-                        About us
-                      </a>
-                    </ListItem>
-                    <ListItem className={classes.inlineBlock}>
-                      <a
-                        href="https://medium.com/adventurerapp"
-                        target="_blank"
-                        className={classes.block}
-                      >
-                        Blog
-                      </a>
-                    </ListItem>
-                  </List>
-                </div>
-                <div className={classes.right} style={{ fontSize: "14px" }}>
-                  &copy; {1900 + new Date().getYear()} , made with{" "}
-                  <Favorite
-                    style={{ color: "green" }}
-                    className={classes.icon}
-                  />{" "}
-                  by Adventurer, for an ethical outdoor world.
-                </div>
-              </div>
-            }
-          />
+          <FooterBar />
         </div>
       </div>
     );

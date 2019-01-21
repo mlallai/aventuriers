@@ -23,6 +23,11 @@ class FooterBar extends React.Component {
                     </a>
                   </ListItem>
                   <ListItem className={classes.inlineBlock}>
+                    <Link to="/contact" className={classes.block}>
+                      Contact
+                    </Link>
+                  </ListItem>
+                  <ListItem className={classes.inlineBlock}>
                     <Link to="/private-policy" className={classes.block}>
                       Private Policy
                     </Link>

@@ -39,6 +39,7 @@ import FormControl from "@material-ui/core/FormControl";
 import signupPageStyle from "assets/jss/material-kit-pro-react/views/signupPageStyle.jsx";
 
 import image from "assets/img/mountain.jpg";
+import FooterBar from "views/Footer/FooterBar.jsx";
 
 const dashboardRoutes = [];
 // const cloudinary = require('cloudinary');
@@ -629,43 +630,7 @@ class AddExperience extends React.Component {
               </GridItem>
             </GridContainer>
           </div>
-          <Footer
-            content={
-              <div>
-                <div className={classes.left}>
-                  <List className={classes.list}>
-                    <ListItem className={classes.inlineBlock}>
-                      <a href="/" className={classes.block}>
-                        Adventurer
-                      </a>
-                    </ListItem>
-                    <ListItem className={classes.inlineBlock}>
-                      <a href="#" className={classes.block}>
-                        About us
-                      </a>
-                    </ListItem>
-                    <ListItem className={classes.inlineBlock}>
-                      <a
-                        href="https://medium.com/adventurerapp"
-                        target="_blank"
-                        className={classes.block}
-                      >
-                        Blog
-                      </a>
-                    </ListItem>
-                  </List>
-                </div>
-                <div className={classes.right} style={{ fontSize: "14px" }}>
-                  &copy; {1900 + new Date().getYear()} , made with{" "}
-                  <Favorite
-                    style={{ color: "green" }}
-                    className={classes.icon}
-                  />{" "}
-                  by Adventurer, for an ethical outdoor world.
-                </div>
-              </div>
-            }
-          />
+          <FooterBar />
         </div>
       </div>
     );

@@ -1,9 +1,9 @@
 import React from "react";
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import { registerUser } from '../../actions/authActions';
-import {withRouter} from 'react-router-dom'
-
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import { registerUser } from "../../actions/authActions";
+import { withRouter } from "react-router-dom";
+import FooterBar from "views/Footer/FooterBar.jsx";
 
 // @material-ui/core components
 import withStyles from "@material-ui/core/styles/withStyles";
@@ -24,9 +24,7 @@ import signupPageStyle from "assets/jss/material-kit-pro-react/views/signupPageS
 
 import image from "assets/img/mountain.jpg";
 
-
 const dashboardRoutes = [];
-
 
 class EmailSent extends React.Component {
   render() {
@@ -54,61 +52,20 @@ class EmailSent extends React.Component {
           }}
         >
           <div className={classes.container}>
-          <GridContainer justify="center">
+            <GridContainer justify="center">
               <GridItem xs={12} sm={10} md={10}>
                 <Card className={classes.cardSignup}>
                   <h5 className={classes.cardTitle}>Mot de passe envoyé !</h5>
                   <CardBody>
                     <GridContainer justify="center">
-                      <GridItem xs={12} sm={5} md={5}>
-                      </GridItem>
+                      <GridItem xs={12} sm={5} md={5} />
                     </GridContainer>
                   </CardBody>
                 </Card>
               </GridItem>
             </GridContainer>
           </div>
-          <Footer
-            content={
-              <div>
-                <div className={classes.left}>
-                  <List className={classes.list}>
-                    <ListItem className={classes.inlineBlock}>
-                      <a
-                        href="/"
-                        className={classes.block}
-                      >
-                        Adventurer
-                      </a>
-                    </ListItem>
-                    <ListItem className={classes.inlineBlock}>
-                      <a
-                        href="#"
-                        className={classes.block}
-                      >
-                        About us
-                      </a>
-                    </ListItem>
-                    <ListItem className={classes.inlineBlock}>
-                      <a
-                        href="https://medium.com/adventurerapp"
-                        target="_blank"
-                        className={classes.block}
-                      >
-                        Blog
-                      </a>
-                    </ListItem>
-                  </List>
-                </div>
-                <div className={classes.right} style={{fontSize: '14px'}}>
-                  &copy; {1900 + new Date().getYear()} , made with{" "}
-                  <Favorite style={{color: 'green'}} className={classes.icon} /> by{" "}
-                  Adventurer, for an
-                  ethical outdoor world.
-                </div>
-              </div>
-            }
-          />
+          <FooterBar />
         </div>
       </div>
     );
@@ -119,14 +76,16 @@ EmailSent.propTypes = {
   registerUser: PropTypes.func.isRequired,
   auth: PropTypes.object.isRequired,
   errors: PropTypes.object.isRequired
-}
- const mapStateToProps = (state) => ({
+};
+const mapStateToProps = state => ({
   auth: state.auth,
   errors: state.errors
-})
+});
 
-export default connect(mapStateToProps, { registerUser })(withStyles(signupPageStyle)(withRouter(EmailSent)));
-
+export default connect(
+  mapStateToProps,
+  { registerUser }
+)(withStyles(signupPageStyle)(withRouter(EmailSent)));
 
 // export default connect(mapStateToProps, { registerUser })(Register);
 // export default withStyles(signupPageStyle);

@@ -1,9 +1,10 @@
 import React from "react";
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import {withRouter} from 'react-router-dom'
-import Moment from 'react-moment';
-import { getMessage, addReply } from '../../actions/messageActions';
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import { withRouter } from "react-router-dom";
+import Moment from "react-moment";
+import { getMessage, addReply } from "../../actions/messageActions";
+import FooterBar from "views/Footer/FooterBar.jsx";
 
 // @material-ui/core components
 import withStyles from "@material-ui/core/styles/withStyles";
@@ -33,47 +34,58 @@ import image from "assets/img/mountain.jpg";
 
 const dashboardRoutes = [];
 
-
 class Message extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-        loadedMessage: '',
-        loadedMessageSenderID: {},
-        loadedMessageRecipientID: {},
-        loadedReplies: [],
+      loadedMessage: "",
+      loadedMessageSenderID: {},
+      loadedMessageRecipientID: {},
+      loadedReplies: []
+    };
+    this.onChange = this.onChange.bind(this);
+    this.onSubmit = this.onSubmit.bind(this);
   }
-  this.onChange = this.onChange.bind(this);
-  this.onSubmit = this.onSubmit.bind(this);
-}
 
-componentWillMount() {
+  componentWillMount() {
     window.scrollTo(0, 0);
     document.body.scrollTop = 0;
     if (this.props.match.params.id) {
-        this.props.getMessage(this.props.match.params.id)
+      this.props.getMessage(this.props.match.params.id);
     }
   }
 
-componentWillReceiveProps(nextProps) {
+  componentWillReceiveProps(nextProps) {
     const { message } = nextProps;
-    if(message.message) {
-        const loadedMessage = message.message;
-        const loadedMessageSenderID = message.message.senderID;
-        const loadedMessageRecipientID = message.message.recipientID;
-        const loadedReplies = message.message.replies;
-        this.setState({loadedMessage: loadedMessage, loadedReplies: loadedReplies, loadedMessageSenderID: loadedMessageSenderID, loadedMessageRecipientID: loadedMessageRecipientID})
+    if (message.message) {
+      const loadedMessage = message.message;
+      const loadedMessageSenderID = message.message.senderID;
+      const loadedMessageRecipientID = message.message.recipientID;
+      const loadedReplies = message.message.replies;
+      this.setState({
+        loadedMessage: loadedMessage,
+        loadedReplies: loadedReplies,
+        loadedMessageSenderID: loadedMessageSenderID,
+        loadedMessageRecipientID: loadedMessageRecipientID
+      });
     }
-}
+  }
 
-onSubmit(e) {
+  onSubmit(e) {
     e.preventDefault();
 
     const messData = {
       text: this.state.text
     };
-    this.props.addReply(this.props.message.message._id, messData, this.props.history);
-    console.log("this.props.message.message._id,", this.props.message.message._id,)
+    this.props.addReply(
+      this.props.message.message._id,
+      messData,
+      this.props.history
+    );
+    console.log(
+      "this.props.message.message._id,",
+      this.props.message.message._id
+    );
   }
 
   onChange(e) {
@@ -82,90 +94,120 @@ onSubmit(e) {
 
   render() {
     const { classes, message, ...rest } = this.props;
-    const { loadedMessage, loadedReplies, loadedMessageSenderID, loadedMessageRecipientID } = this.state;
+    const {
+      loadedMessage,
+      loadedReplies,
+      loadedMessageSenderID,
+      loadedMessageRecipientID
+    } = this.state;
     const { isAuthenticated, user } = this.props.auth;
 
     // Setup of conversation user
     let messagePartnerFirstName;
     let messagePartnerLastName;
-    if (loadedMessageSenderID === undefined || loadedMessageRecipientID === undefined) {
-        messagePartnerFirstName = "";
-        messagePartnerLastName = "";
-    }
-    else {
-        if (loadedMessageSenderID._id === user.id) {
-            messagePartnerFirstName = loadedMessageRecipientID.firstName;
-            messagePartnerLastName = loadedMessageRecipientID.lastName;
-        }
-        else {
-            messagePartnerFirstName = loadedMessageSenderID.firstName;
-            messagePartnerLastName = loadedMessageSenderID.lastName;
-        }
+    if (
+      loadedMessageSenderID === undefined ||
+      loadedMessageRecipientID === undefined
+    ) {
+      messagePartnerFirstName = "";
+      messagePartnerLastName = "";
+    } else {
+      if (loadedMessageSenderID._id === user.id) {
+        messagePartnerFirstName = loadedMessageRecipientID.firstName;
+        messagePartnerLastName = loadedMessageRecipientID.lastName;
+      } else {
+        messagePartnerFirstName = loadedMessageSenderID.firstName;
+        messagePartnerLastName = loadedMessageSenderID.lastName;
+      }
     }
     // End of Setup of conversation user
 
     // Setup of original message
     let originalMessage = undefined;
     if (loadedMessage === undefined || loadedMessageSenderID === undefined) {
-        originalMessage = (
-            <h4>
-              <Spinner />
-            </h4>
-        )
-         } else {
-        originalMessage = 
-            <Media
-              avatar={loadedMessageSenderID.avatar}
-               title={
-               <span>
-                    <small style={{fontWeight: 'bold'}}>{loadedMessageSenderID.firstName} {loadedMessageSenderID.lastName}</small>
-                    <br/>
-                    <small>le <Moment format={"DD/MM/YYYY"}>{loadedMessage.date}</Moment></small>
-               </span>
-                }
-                body={
-                    <span>
-                       <p style={{fontSize: '14px', color: '#555555'}}>
-                       {loadedMessage.text}
-                       </p>
-                    </span>
-                }
-            />
+      originalMessage = (
+        <h4>
+          <Spinner />
+        </h4>
+      );
+    } else {
+      originalMessage = (
+        <Media
+          avatar={loadedMessageSenderID.avatar}
+          title={
+            <span>
+              <small style={{ fontWeight: "bold" }}>
+                {loadedMessageSenderID.firstName}{" "}
+                {loadedMessageSenderID.lastName}
+              </small>
+              <br />
+              <small>
+                le <Moment format={"DD/MM/YYYY"}>{loadedMessage.date}</Moment>
+              </small>
+            </span>
+          }
+          body={
+            <span>
+              <p style={{ fontSize: "14px", color: "#555555" }}>
+                {loadedMessage.text}
+              </p>
+            </span>
+          }
+        />
+      );
     }
     // End of Setup of original message
-    
+
     // Setup of Replies
     let originalMessageReplies = undefined;
-    if (loadedReplies === undefined || loadedMessageSenderID === undefined || loadedMessageRecipientID === undefined) {
-        originalMessageReplies = (
-            <h4>
-              <Spinner />
-            </h4>
-        )
-         } else {
-            originalMessageReplies = loadedReplies.map(reply => (
-                <div>
-                        <Media
-                        avatar= {reply.senderID === loadedMessageSenderID ? loadedMessageSenderID.avatar : loadedMessageRecipientID.avatar}
-                    title={
-                    <span>
-                            <small style={{fontWeight: 'bold'}}>{reply.senderID === loadedMessageSenderID ? loadedMessageSenderID.firstname : loadedMessageRecipientID.firstName} {reply.senderID === loadedMessageSenderID ? loadedMessageSenderID.lastName : loadedMessageRecipientID.lastName}</small>
-                            <br />
-                            <small>le <Moment format={"DD/MM/YYYY"}>{reply.date}</Moment></small>
-                    </span>
-                        }
-                        body={
-                            <span>
-                            <p style={{fontSize: '14px', color: '#555555'}}>
-                            {reply.text}</p>
-                            </span>
-                        }
-                    />
-            </div>
-            ))
-         }
-        
-         // End ofSetup of Replies
+    if (
+      loadedReplies === undefined ||
+      loadedMessageSenderID === undefined ||
+      loadedMessageRecipientID === undefined
+    ) {
+      originalMessageReplies = (
+        <h4>
+          <Spinner />
+        </h4>
+      );
+    } else {
+      originalMessageReplies = loadedReplies.map(reply => (
+        <div>
+          <Media
+            avatar={
+              reply.senderID === loadedMessageSenderID
+                ? loadedMessageSenderID.avatar
+                : loadedMessageRecipientID.avatar
+            }
+            title={
+              <span>
+                <small style={{ fontWeight: "bold" }}>
+                  {reply.senderID === loadedMessageSenderID
+                    ? loadedMessageSenderID.firstname
+                    : loadedMessageRecipientID.firstName}{" "}
+                  {reply.senderID === loadedMessageSenderID
+                    ? loadedMessageSenderID.lastName
+                    : loadedMessageRecipientID.lastName}
+                </small>
+                <br />
+                <small>
+                  le <Moment format={"DD/MM/YYYY"}>{reply.date}</Moment>
+                </small>
+              </span>
+            }
+            body={
+              <span>
+                <p style={{ fontSize: "14px", color: "#555555" }}>
+                  {reply.text}
+                </p>
+              </span>
+            }
+          />
+        </div>
+      ));
+    }
+
+    // End ofSetup of Replies
 
     return (
       <div>
@@ -199,97 +241,70 @@ onSubmit(e) {
             <GridContainer justify="center">
               <GridItem xs={12} sm={10} md={10}>
                 <Card className={classes.cardSignup}>
-                  <h2 className={classes.cardTitle}>Conversation avec {messagePartnerFirstName} {messagePartnerLastName}</h2>
+                  <h2 className={classes.cardTitle}>
+                    Conversation avec {messagePartnerFirstName}{" "}
+                    {messagePartnerLastName}
+                  </h2>
                   <CardBody>
-                  <GridContainer justify="center" style={{display: 'block'}}>
-                              {/*  Envoyer un message */}
-          <div>
-            <form onSubmit={this.onSubmit}>
-            <Media
-                      avatar={user.avatar}
-                      body={
-                        <CustomInput
-                          id="reply"
-                          formControlProps={{
-                            fullWidth: true
-                          }}
-                          inputProps={{
-                            multiline: true,
-                            rows: 4,
-                            placeholder: "Ecrivez votre message..",
-                            onChange:this.onChange,
-                            name: "text",
-                            value:this.state.text
-                          }}
-                        />
-                      }
-                      footer={
-                        <Button
-                        type="submit" 
-                        color="warning" 
-                        className={classes.floatRight}>
-                           <span style={{textTransform: 'uppercase', color: 'black', fontWeight: 'bold'}}>Envoyer le message</span>
-                        </Button>
-                      }
-            />
-            </form>
-        </div>
-        
-        {/* Fin Envoyer un message */}
-                  <GridContainer style={{display: 'block'}}>
+                    <GridContainer
+                      justify="center"
+                      style={{ display: "block" }}
+                    >
+                      {/*  Envoyer un message */}
+                      <div>
+                        <form onSubmit={this.onSubmit}>
+                          <Media
+                            avatar={user.avatar}
+                            body={
+                              <CustomInput
+                                id="reply"
+                                formControlProps={{
+                                  fullWidth: true
+                                }}
+                                inputProps={{
+                                  multiline: true,
+                                  rows: 4,
+                                  placeholder: "Ecrivez votre message..",
+                                  onChange: this.onChange,
+                                  name: "text",
+                                  value: this.state.text
+                                }}
+                              />
+                            }
+                            footer={
+                              <Button
+                                type="submit"
+                                color="warning"
+                                className={classes.floatRight}
+                              >
+                                <span
+                                  style={{
+                                    textTransform: "uppercase",
+                                    color: "black",
+                                    fontWeight: "bold"
+                                  }}
+                                >
+                                  Envoyer le message
+                                </span>
+                              </Button>
+                            }
+                          />
+                        </form>
+                      </div>
+
+                      {/* Fin Envoyer un message */}
+                      <GridContainer style={{ display: "block" }}>
                         {originalMessageReplies}
+                      </GridContainer>
+                      <br />
+                      <GridContainer>{originalMessage}</GridContainer>
                     </GridContainer>
-                    <br />
-                    <GridContainer>
-                        {originalMessage}
-                    </GridContainer>
-                  </GridContainer>
                   </CardBody>
                 </Card>
               </GridItem>
             </GridContainer>
           </div>
-          <Footer
-            content={
-              <div>
-                <div className={classes.left}>
-                  <List className={classes.list}>
-                    <ListItem className={classes.inlineBlock}>
-                      <a
-                        href="/"
-                        className={classes.block}
-                      >
-                        Adventurer
-                      </a>
-                    </ListItem>
-                    <ListItem className={classes.inlineBlock}>
-                      <a
-                        href="#"
-                        className={classes.block}
-                      >
-                        About us
-                      </a>
-                    </ListItem>
-                    <ListItem className={classes.inlineBlock}>
-                      <a
-                        href="https://medium.com/adventurerapp"
-                        target="_blank"
-                        className={classes.block}
-                      >
-                        Blog
-                      </a>
-                    </ListItem>
-                  </List>
-                </div>
-                <div className={classes.right} style={{fontSize: '14px'}}>
-                  &copy; {1900 + new Date().getYear()} , made with{" "}
-                  <Favorite style={{color: 'green'}} className={classes.icon} /> by{" "}
-                  Adventurer, for an
-                  ethical outdoor world.
-                </div>
-              </div>
-            }
-          />
+          <FooterBar />
         </div>
       </div>
     );
@@ -297,16 +312,17 @@ onSubmit(e) {
 }
 
 Message.propTypes = {
-    auth: PropTypes.object.isRequired,
-    getMessage: PropTypes.func.isRequired,
-    addReply: PropTypes.func.isRequired,
-  };
+  auth: PropTypes.object.isRequired,
+  getMessage: PropTypes.func.isRequired,
+  addReply: PropTypes.func.isRequired
+};
 
 const mapStateToProps = state => ({
-    auth: state.auth,
-    message: state.message
-    
-  });
+  auth: state.auth,
+  message: state.message
+});
 
-export default connect(mapStateToProps, { getMessage, addReply }) (withStyles(signupPageStyle)(withRouter(Message)));
-
+export default connect(
+  mapStateToProps,
+  { getMessage, addReply }
+)(withStyles(signupPageStyle)(withRouter(Message)));
