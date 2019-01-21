@@ -519,10 +519,10 @@ router.post(
           let data = {
             to: user.email,
             from: email,
-            template: "message-email",
+            template: "comment-email",
             subject: "Commentaire reçu sur Aventuriers.co !",
             context: {
-              url: "http://localhost:3000/messages",
+              url: "http://www.aventuriers.co/profile",
               name: user.firstName,
               message: req.body.text
             }
