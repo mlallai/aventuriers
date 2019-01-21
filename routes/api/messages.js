@@ -145,7 +145,8 @@ router.post(
     // Find the conversation corresponding to the reply
     Message.findOne({ _id: req.params.id }).then(message => {
       let replyRecipientID;
-      if (message.senderID === req.user.id) {
+
+      if ((message.senderID = req.user.id)) {
         replyRecipientID = message.recipientID;
       } else {
         replyRecipientID = message.senderID;
@@ -170,7 +171,7 @@ router.post(
           template: "message-email",
           subject: "Message reçu sur Aventuriers.co !",
           context: {
-            url: "http://localhost:3000/profile",
+            url: "http://www.aventuriers.co/messages",
             name: user.firstName,
             message: req.body.text
           }
