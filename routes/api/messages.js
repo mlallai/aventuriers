@@ -49,8 +49,20 @@ router.get(
     Message.find({
       $or: [{ senderID: req.user.id }, { recipientID: req.user.id }]
     })
-      .populate("senderID", ["firstName", "lastName", "email", "avatar"])
-      .populate("recipientID", ["firstName", "lastName", "email", "avatar"])
+      .populate("senderID", [
+        "firstName",
+        "lastName",
+        "email",
+        "avatar",
+        "defaultAvatar"
+      ])
+      .populate("recipientID", [
+        "firstName",
+        "lastName",
+        "email",
+        "avatar",
+        "defaultAvatar"
+      ])
       .sort({ date: -1 })
       .then(message => res.json(message))
       .catch(err => res.status(404).json({ nomessage: "No messages found" }));
@@ -65,8 +77,20 @@ router.get(
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
     Message.findById(req.params.id)
-      .populate("senderID", ["firstName", "lastName", "email", "avatar"])
-      .populate("recipientID", ["firstName", "lastName", "email", "avatar"])
+      .populate("senderID", [
+        "firstName",
+        "lastName",
+        "email",
+        "avatar",
+        "defaultAvatar"
+      ])
+      .populate("recipientID", [
+        "firstName",
+        "lastName",
+        "email",
+        "avatar",
+        "defaultAvatar"
+      ])
       .then(message => res.json(message))
       .catch(err =>
         res
@@ -145,17 +169,38 @@ router.post(
     // Find the conversation corresponding to the reply
     Message.findOne({ _id: req.params.id }).then(message => {
       let replyRecipientID;
+      console.log("req.user.id", req.user.id);
+      console.log("message.recipientID", message.recipientID);
+      console.log("message.senderID", message.senderID);
 
-      if ((message.senderID = req.user.id)) {
+      // if ((req.user.id = message.senderID)) {
+      //   replyRecipientID = message.recipientID;
+      // } else {
+      //   replyRecipientID = message.senderID;
+      // }
+
+      if (req.user.id === message.senderID) {
+        console.log("route1");
         replyRecipientID = message.recipientID;
       } else {
+        console.log("route2");
         replyRecipientID = message.senderID;
       }
+
+      console.log("replyRecipientID", replyRecipientID);
+
+      // if (message.senderID === req.user.id) {
+      //   replyRecipientID = message.recipientID;
+      // } else {
+      //   replyRecipientID = message.senderID;
+      // }
       const newReply = {
         text: req.body.text,
         senderID: req.user.id,
         recipientID: replyRecipientID
       };
+
+      console.log("newReply", newReply);
 
       // Add to new Reply to the replies Array
       message.replies.unshift(newReply);

@@ -10,6 +10,8 @@ import FooterBar from "views/Footer/FooterBar.jsx";
 import withStyles from "@material-ui/core/styles/withStyles";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
+import Avatar from "@material-ui/core/Avatar";
+
 // @material-ui/icons
 import Favorite from "@material-ui/icons/Favorite";
 
@@ -100,6 +102,12 @@ class Message extends React.Component {
       loadedMessageSenderID,
       loadedMessageRecipientID
     } = this.state;
+    console.log(
+      "loadedMessageSenderID",
+      loadedMessageSenderID,
+      "loadedMessageRecipientID",
+      loadedMessageRecipientID
+    );
     const { isAuthenticated, user } = this.props.auth;
 
     // Setup of conversation user
@@ -132,28 +140,34 @@ class Message extends React.Component {
       );
     } else {
       originalMessage = (
-        <Media
-          avatar={loadedMessageSenderID.avatar}
-          title={
-            <span>
-              <small style={{ fontWeight: "bold" }}>
-                {loadedMessageSenderID.firstName}{" "}
-                {loadedMessageSenderID.lastName}
-              </small>
-              <br />
-              <small>
-                le <Moment format={"DD/MM/YYYY"}>{loadedMessage.date}</Moment>
-              </small>
-            </span>
-          }
-          body={
-            <span>
-              <p style={{ fontSize: "14px", color: "#555555" }}>
-                {loadedMessage.text}
-              </p>
-            </span>
-          }
-        />
+        <GridContainer>
+          <GridItem xs={2}>
+            {loadedMessageSenderID.avatar ? (
+              <Avatar style={{ float: "right" }}>
+                {" "}
+                {loadedMessageSenderID.avatar}{" "}
+              </Avatar>
+            ) : (
+              <Avatar style={{ float: "right", backgroundColor: "#2a8afa" }}>
+                {" "}
+                {loadedMessageSenderID.defaultAvatar}{" "}
+              </Avatar>
+            )}
+          </GridItem>
+          <GridItem xs={10} md={7}>
+            <small style={{ fontWeight: "bold" }}>
+              {loadedMessageSenderID.firstName} {loadedMessageSenderID.lastName}
+            </small>
+            <br />
+            <small style={{ fontStyle: "italic" }}>
+              le <Moment format={"DD/MM/YYYY"}>{loadedMessage.date}</Moment>
+            </small>
+            <br />
+            <p style={{ fontSize: "14px", color: "#555555" }}>
+              {loadedMessage.text}
+            </p>
+          </GridItem>
+        </GridContainer>
       );
     }
     // End of Setup of original message
@@ -173,36 +187,37 @@ class Message extends React.Component {
     } else {
       originalMessageReplies = loadedReplies.map(reply => (
         <div>
-          <Media
-            avatar={
-              reply.senderID === loadedMessageSenderID
-                ? loadedMessageSenderID.avatar
-                : loadedMessageRecipientID.avatar
-            }
-            title={
-              <span>
-                <small style={{ fontWeight: "bold" }}>
-                  {reply.senderID === loadedMessageSenderID
-                    ? loadedMessageSenderID.firstname
-                    : loadedMessageRecipientID.firstName}{" "}
-                  {reply.senderID === loadedMessageSenderID
-                    ? loadedMessageSenderID.lastName
-                    : loadedMessageRecipientID.lastName}
-                </small>
-                <br />
-                <small>
-                  le <Moment format={"DD/MM/YYYY"}>{reply.date}</Moment>
-                </small>
-              </span>
-            }
-            body={
-              <span>
-                <p style={{ fontSize: "14px", color: "#555555" }}>
-                  {reply.text}
-                </p>
-              </span>
-            }
-          />
+          <GridContainer>
+            <GridItem xs={2}>
+              {reply.senderID === loadedMessageSenderID._id ? (
+                <Avatar style={{ float: "right", backgroundColor: "#2a8afa" }}>
+                  {" "}
+                  {loadedMessageSenderID.defaultAvatar}{" "}
+                </Avatar>
+              ) : (
+                <Avatar style={{ float: "right", backgroundColor: "#2a8afa" }}>
+                  {" "}
+                  {loadedMessageRecipientID.defaultAvatar}{" "}
+                </Avatar>
+              )}
+            </GridItem>
+            <GridItem xs={10} md={7}>
+              <small style={{ fontWeight: "bold" }}>
+                {reply.senderID === loadedMessageSenderID._id
+                  ? loadedMessageSenderID.firstname
+                  : loadedMessageRecipientID.firstName}{" "}
+                {reply.senderID === loadedMessageSenderID._id
+                  ? loadedMessageSenderID.lastName
+                  : loadedMessageRecipientID.lastName}
+              </small>
+              <br />
+              <small style={{ fontStyle: "italic" }}>
+                le <Moment format={"DD/MM/YYYY"}>{reply.date}</Moment>
+              </small>
+              <br />
+              <p style={{ fontSize: "14px", color: "#555555" }}>{reply.text}</p>
+            </GridItem>
+          </GridContainer>
         </div>
       ));
     }
@@ -297,7 +312,7 @@ class Message extends React.Component {
                         {originalMessageReplies}
                       </GridContainer>
                       <br />
-                      <GridContainer>{originalMessage}</GridContainer>
+                      {originalMessage}
                     </GridContainer>
                   </CardBody>
                 </Card>
