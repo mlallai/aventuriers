@@ -234,7 +234,7 @@ class Register extends React.Component {
                                   </Icon>
                                 </InputAdornment>
                               ),
-                              placeholder: "Password...",
+                              placeholder: "Mot de passe...",
                               onChange: this.onChange,
                               name: "password",
                               value: this.state.password,
