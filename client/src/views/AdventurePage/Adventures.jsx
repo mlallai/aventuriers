@@ -12,6 +12,7 @@ import FooterBar from "views/Footer/FooterBar.jsx";
 import withStyles from "@material-ui/core/styles/withStyles";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
+import TextField from "@material-ui/core/TextField";
 // @material-ui/icons
 import Favorite from "@material-ui/icons/Favorite";
 // core components
@@ -21,6 +22,8 @@ import Footer from "components/Footer/Footer.jsx";
 import GridContainer from "components/Grid/GridContainer.jsx";
 import GridItem from "components/Grid/GridItem.jsx";
 import Parallax from "components/Parallax/Parallax.jsx";
+import CustomInput from "components/CustomInput/CustomInput.jsx";
+
 // sections for this page
 
 import Card from "components/Card/Card.jsx";
@@ -44,7 +47,10 @@ class Adventures extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      loadedAdventures: []
+      loadedAdventures: [],
+      searchTerm: "",
+      searchLoading: false,
+      searchResults: []
     };
   }
 
@@ -77,6 +83,34 @@ class Adventures extends React.Component {
     }
   }
 
+  handleSearchChange = event => {
+    this.setState(
+      {
+        searchTerm: event.target.value,
+        searchLoading: true
+      },
+      () => this.handleSearchAdventures()
+    );
+  };
+
+  handleSearchAdventures = () => {
+    const channelAdventures = [...this.state.loadedAdventures];
+    const regex = new RegExp(this.state.searchTerm, "gi");
+    const searchResults = channelAdventures.reduce((acc, adventure) => {
+      if (
+        (adventure.title && adventure.title.match(regex)) ||
+        (adventure.summary && adventure.summary.match(regex)) ||
+        (adventure.location && adventure.location.match(regex)) ||
+        (adventure.mainActivity[0] && adventure.mainActivity[0].match(regex))
+      ) {
+        acc.push(adventure);
+      }
+      return acc;
+    }, []);
+    this.setState({ searchResults });
+    setTimeout(() => this.setState({ searchLoading: false }), 1000);
+  };
+
   handleGetAdventures = (filters = this.props.filters) => {
     // this.setState({ loading: true });
     // this.props.getAdventures(filters, () => {
@@ -87,7 +121,7 @@ class Adventures extends React.Component {
 
   render() {
     const { classes, ...rest } = this.props;
-    const { loadedAdventures, loading } = this.state;
+    const { loadedAdventures, loading, searchTerm, searchResults } = this.state;
     console.log("loadedAdventures dans le render", loadedAdventures);
     // const { adventures, loading } = this.props.adventures;
     const { isAuthenticated } = this.props.auth;
@@ -99,7 +133,7 @@ class Adventures extends React.Component {
           <Spinner />
         </h4>
       );
-    } else {
+    } else if (!this.state.searchTerm) {
       adventureItems = loadedAdventures.map(adv => (
         <GridItem xs={12} sm={6} md={4}>
           <Card plain blog>
@@ -217,6 +251,129 @@ class Adventures extends React.Component {
           </Card>
         </GridItem>
       ));
+    } else {
+      adventureItems = searchResults.map(result => (
+        <GridItem xs={12} sm={6} md={4}>
+          <Card plain blog>
+            <div>
+              <CardHeader
+                plain
+                image
+                style={{ position: "relative", textAlign: "center" }}
+              >
+                <div style={{ width: "100%" }}>
+                  <Link to={`/adventure/${result._id}`}>
+                    {result.pictures[0] ? (
+                      <img src={result.pictures[0]} alt="..." />
+                    ) : (
+                      <img
+                        style={{ minHeight: "170px" }}
+                        src={result.defaultPictures[0]}
+                        alt="..."
+                      />
+                    )}
+                  </Link>
+                </div>
+                <div style={{ position: "absolute", top: "0px", left: "2px" }}>
+                  <GridContainer>
+                    <GridItem xs={6}>
+                      {result.from ? (
+                        <Badge color="warning">
+                          <span style={{ color: "black" }}>
+                            <Moment format={"DD/MM/YY"}>{result.from}</Moment>
+                          </span>
+                        </Badge>
+                      ) : (
+                        <Badge color="warning">
+                          <span style={{ color: "black" }}>A DEFINIR</span>
+                        </Badge>
+                      )}
+                    </GridItem>
+                    <GridItem xs={6}>
+                      {result.ecoLabel.length > 0 ? (
+                        <img
+                          style={{ width: "25px" }}
+                          src={EcoBadge}
+                          alt="..."
+                        />
+                      ) : (
+                        ""
+                      )}
+                    </GridItem>
+                  </GridContainer>
+                  {/* <GridContainer>
+                          <GridItem xs={12}>
+                            <span style={{color: '#ffffff', textTransform: 'uppercase', fontSize: '10px', fontWeight: 'bold'}}>Niveau {adv.level}</span>
+                          </GridItem>
+                          </GridContainer> */}
+                  <GridContainer>
+                    <GridItem xs={12}>
+                      {result.recurring ? (
+                        <Badge color="info">
+                          <span style={{ color: "#ffffff" }}>
+                            ACTIVITE RECURRENTE
+                          </span>
+                        </Badge>
+                      ) : (
+                        ""
+                      )}
+                    </GridItem>
+                  </GridContainer>
+                </div>
+              </CardHeader>
+            </div>
+            <CardBody plain>
+              <Info>
+                <h6 className={classes.cardCategory}>
+                  {result.mainActivity} - {result.location}
+                  <br />
+                  <span style={{ color: "#9c27b0" }}>
+                    Niveau {result.level}
+                  </span>
+                </h6>
+              </Info>
+
+              <Link
+                to={`/adventure/${result._id}`}
+                onClick={e => e.preventDefault()}
+              >
+                <h3
+                  style={{
+                    fontSize: "1.4em",
+                    color: "#3C4858",
+                    marginTop: "0",
+                    marginBottom: "0",
+                    minHeight: "65px"
+                  }}
+                  className={classes.cardTitle}
+                >
+                  {result.title}
+                </h3>
+              </Link>
+              {/* {adv.summary ?
+                          <div>
+                            <p style={{marginBottom: '0', height: '50px', overflow: 'scroll'}} className={classes.description}>
+                            {adv.summary}
+                            </p>
+                          </div>
+                          : ''} */}
+              <div>
+                <Link
+                  style={{ color: "black" }}
+                  to={`/adventure/${result._id}`}
+                >
+                  {" "}
+                  <Button color="warning" size="sm">
+                    <span style={{ color: "black", fontWeight: "bold" }}>
+                      Voir
+                    </span>
+                  </Button>
+                </Link>
+              </div>
+            </CardBody>
+          </Card>
+        </GridItem>
+      ));
     }
     return (
       <div>
@@ -239,7 +396,7 @@ class Adventures extends React.Component {
           {...rest}
         />
         <Parallax
-          image={require("assets/img/examples/mountainAdv.jpeg")}
+          image={require("assets/img/mountain.jpg")}
           filter="dark"
           small
         >
@@ -270,12 +427,23 @@ class Adventures extends React.Component {
                   <h3 style={{ fontWeight: "bold", textAlign: "center" }}>
                     Filtres
                   </h3>
+                  <CustomInput
+                    formControlProps={{
+                      fullWidth: true,
+                      className: classes.customFormControlClasses
+                    }}
+                    inputProps={{
+                      placeholder: "Recherche libre",
+                      onChange: this.handleSearchChange,
+                      name: "searchTerm"
+                    }}
+                  />
                   <Accordion
                     active={1}
                     activeColor="info"
                     collapses={[
                       {
-                        title: "Sport",
+                        title: "Filtre par sport",
                         content: <SportFilter />
                       }
                     ]}
@@ -285,7 +453,7 @@ class Adventures extends React.Component {
                     activeColor="info"
                     collapses={[
                       {
-                        title: "Niveau",
+                        title: "Filtre par niveau",
                         content: <LevelFilter />
                       }
                     ]}
