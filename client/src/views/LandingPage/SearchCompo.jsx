@@ -132,8 +132,8 @@ class SearchCompo extends Component {
         <GridContainer style={{}}>
           <GridItem
             xs={12}
-            sm={12}
-            md={12}
+            sm={10}
+            md={5}
             lg={5}
             style={{ marginBottom: "10px" }}
           >
@@ -153,7 +153,7 @@ class SearchCompo extends Component {
                   name="mainActivity"
                   value={this.state.mainActivity}
                   onChange={this.onChange}
-                  style={{ minWidth: "300px", fontWeight: "bold" }}
+                  style={{ minWidth: "260px", fontWeight: "bold" }}
                 />
                 <IconButton
                   className={classes.iconButton}

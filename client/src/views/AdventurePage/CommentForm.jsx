@@ -17,7 +17,8 @@ class CommentForm extends Component {
     super(props);
     this.state = {
       text: "",
-      errors: {}
+      errors: {},
+      errorText: ""
     };
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
@@ -30,20 +31,27 @@ class CommentForm extends Component {
   onSubmit(e) {
     e.preventDefault();
 
-    const { user } = this.props.auth;
-    const { adventureId } = this.props;
+    if (this.state.text.length < 10) {
+      this.setState({
+        errorText: "Votre commentaire doit contenir au moins 10 caractères."
+        // text: ""
+      });
+    } else {
+      const { user } = this.props.auth;
+      const { adventureId } = this.props;
 
-    const newComment = {
-      text: this.state.text,
-      firstName: user.firstName,
-      lastName: user.firstName,
-      avatar: user.avatar,
-      defaultAvatar: user.defaultAvatar
-    };
+      const newComment = {
+        text: this.state.text,
+        firstName: user.firstName,
+        lastName: user.firstName,
+        avatar: user.avatar,
+        defaultAvatar: user.defaultAvatar
+      };
 
-    this.props.addComment(adventureId, newComment);
+      this.props.addComment(adventureId, newComment);
 
-    this.setState({ text: "" });
+      this.setState({ text: "", errorText: "" });
+    }
   }
   onChange(e) {
     this.setState({ [e.target.name]: e.target.value });
@@ -103,6 +111,11 @@ class CommentForm extends Component {
               </Button>
               {/* //           }
             // /> */}
+              {this.state.errorText && (
+                <div style={{ color: "red", fontSize: "12px" }}>
+                  {this.state.errorText}
+                </div>
+              )}
             </GridItem>
           </GridContainer>
         </form>

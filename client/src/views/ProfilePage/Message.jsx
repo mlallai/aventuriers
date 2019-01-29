@@ -43,7 +43,9 @@ class Message extends React.Component {
       loadedMessage: "",
       loadedMessageSenderID: {},
       loadedMessageRecipientID: {},
-      loadedReplies: []
+      loadedReplies: [],
+      errorText: "",
+      text: ""
     };
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
@@ -76,18 +78,21 @@ class Message extends React.Component {
   onSubmit(e) {
     e.preventDefault();
 
-    const messData = {
-      text: this.state.text
-    };
-    this.props.addReply(
-      this.props.message.message._id,
-      messData,
-      this.props.history
-    );
-    console.log(
-      "this.props.message.message._id,",
-      this.props.message.message._id
-    );
+    if (this.state.text.length < 10) {
+      this.setState({
+        errorText: "Votre commentaire doit contenir au moins 10 caractères."
+        // text: ""
+      });
+    } else {
+      const messData = {
+        text: this.state.text
+      };
+      this.props.addReply(
+        this.props.message.message._id,
+        messData,
+        this.props.history
+      );
+    }
   }
 
   onChange(e) {
@@ -102,12 +107,7 @@ class Message extends React.Component {
       loadedMessageSenderID,
       loadedMessageRecipientID
     } = this.state;
-    console.log(
-      "loadedMessageSenderID",
-      loadedMessageSenderID,
-      "loadedMessageRecipientID",
-      loadedMessageRecipientID
-    );
+
     const { isAuthenticated, user } = this.props.auth;
 
     // Setup of conversation user
@@ -268,8 +268,51 @@ class Message extends React.Component {
                       {/*  Envoyer un message */}
                       <div>
                         <form onSubmit={this.onSubmit}>
-                          <Media
-                            avatar={user.avatar}
+                          <GridContainer>
+                            <GridItem xs={12} md={12}>
+                              {user.avatar ? (
+                                <Avatar alt="" src={user.avatar} />
+                              ) : (
+                                <Avatar style={{ backgroundColor: "#ffcc00" }}>
+                                  {user.defaultAvatar}
+                                </Avatar>
+                              )}
+                              <CustomInput
+                                id="reply"
+                                formControlProps={{
+                                  fullWidth: true
+                                }}
+                                inputProps={{
+                                  multiline: true,
+                                  rows: 4,
+                                  placeholder: "Ecrivez votre message..",
+                                  onChange: this.onChange,
+                                  name: "text",
+                                  value: this.state.text
+                                }}
+                                // name = "text"
+                                // value = {this.state.text}
+                                // onChange = {this.onChange}
+                              />
+                            </GridItem>
+                          </GridContainer>
+                          <Button
+                            type="submit"
+                            color="warning"
+                            className={classes.floatRight}
+                          >
+                            <span
+                              style={{
+                                textTransform: "uppercase",
+                                color: "black",
+                                fontWeight: "bold"
+                              }}
+                            >
+                              Envoyer le message
+                            </span>
+                          </Button>
+                          {/* <Media
+                            avatar={user.defaultAvatar}
                             body={
                               <CustomInput
                                 id="reply"
@@ -303,7 +346,12 @@ class Message extends React.Component {
                                 </span>
                               </Button>
                             }
-                          />
+                          /> */}
+                          {this.state.errorText && (
+                            <div style={{ color: "red", fontSize: "12px" }}>
+                              {this.state.errorText}
+                            </div>
+                          )}
                         </form>
                       </div>
 
