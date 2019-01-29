@@ -7,6 +7,7 @@ import LevelFilter from "./LevelFilter";
 import { Link } from "react-router-dom";
 import Moment from "react-moment";
 import FooterBar from "views/Footer/FooterBar.jsx";
+import slugify from "slugify";
 
 // @material-ui/core components
 import withStyles from "@material-ui/core/styles/withStyles";
@@ -117,11 +118,12 @@ class Adventures extends React.Component {
     const regex = new RegExp(this.state.searchTerm, "gi");
     const searchResults = channelAdventures.reduce((acc, adventure) => {
       if (
-        (adventure.title && adventure.title.match(regex)) ||
+        (slugify(adventure.title) && slugify(adventure.title).match(regex)) ||
         (adventure.summary && adventure.summary.match(regex)) ||
-        (adventure.location && adventure.location.match(regex)) ||
-        (adventure.mainActivity[0] && adventure.mainActivity[0].match(regex)) ||
-        (adventure.country && adventure.country.match(regex))
+        (slugify(adventure.location) && adventure.location.match(regex)) ||
+        (slugify(adventure.mainActivity[0]) &&
+          adventure.mainActivity[0].match(regex)) ||
+        (slugify(adventure.country) && adventure.country.match(regex))
       ) {
         acc.push(adventure);
       }

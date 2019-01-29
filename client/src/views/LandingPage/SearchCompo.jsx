@@ -18,6 +18,7 @@ import InputBase from "@material-ui/core/InputBase";
 import Divider from "@material-ui/core/Divider";
 
 import { Link } from "react-router-dom";
+import slugify from "slugify";
 
 class SearchCompo extends Component {
   state = {
@@ -128,50 +129,52 @@ class SearchCompo extends Component {
 
     return (
       <div>
-        <GridContainer
-          style={{ alignItems: "center", justifyContent: "center" }}
-        >
-          {/* <GridItem xs={12}> */}
-          <form onValidate onSubmit={this.onSubmit}>
-            {/* Choix du sport */}
-            <Paper
-              className={classes.root}
-              elevation={1}
-              style={{ paddingLeft: "10px" }}
-            >
-              {/* <IconButton className={classes.iconButton} aria-label="Menu">
+        <GridContainer style={{}}>
+          <GridItem xs={12} md={5} style={{ marginBottom: "10px" }}>
+            <form onValidate onSubmit={this.onSubmit}>
+              {/* Choix du sport */}
+              <Paper
+                className={classes.root}
+                elevation={1}
+                style={{ paddingLeft: "10px" }}
+              >
+                {/* <IconButton className={classes.iconButton} aria-label="Menu">
                 <MenuIcon />
               </IconButton> */}
-              <InputBase
-                className={classes.input}
-                placeholder="Recherchez par sport, lieu ou pays..."
-                name="mainActivity"
-                value={this.state.mainActivity}
-                onChange={this.onChange}
-                style={{ minWidth: "300px", fontWeight: "bold" }}
-              />
-              <IconButton
-                className={classes.iconButton}
-                aria-label="Search"
-                type="submit"
-              >
-                <Link
-                  to={`/adventures/${this.state.mainActivity}`}
-                  style={{ color: "warning" }}
+                <InputBase
+                  className={classes.input}
+                  placeholder="Recherchez par sport, lieu ou pays..."
+                  name="mainActivity"
+                  value={this.state.mainActivity}
+                  onChange={this.onChange}
+                  style={{ minWidth: "300px", fontWeight: "bold" }}
+                />
+                <IconButton
+                  className={classes.iconButton}
+                  aria-label="Search"
+                  type="submit"
                 >
-                  <SearchIcon style={{ backgroundColor: "warning" }} />
-                </Link>
-              </IconButton>
-              {/* <Divider className={classes.divider} /> */}
-              {/* <IconButton
+                  <Link
+                    to={`/adventures/${slugify(
+                      this.state.mainActivity
+                    ).toLowerCase()}`}
+                    style={{ color: "#ffcc00" }}
+                  >
+                    <SearchIcon
+                      style={{ fontSize: "30px", fontWeight: "bold" }}
+                    />
+                  </Link>
+                </IconButton>
+                {/* <Divider className={classes.divider} /> */}
+                {/* <IconButton
                 color="primary"
                 className={classes.iconButton}
                 aria-label="Directions"
               >
                 <DirectionsIcon />
               </IconButton> */}
-            </Paper>
-            {/* <FormControl
+              </Paper>
+              {/* <FormControl
                 fullWidth
                 className={classes.selectFormControl}
                 style={{
@@ -246,8 +249,8 @@ class SearchCompo extends Component {
                   </GridItem>
                 </GridContainer>
               </FormControl> */}
-          </form>
-          {/* </GridItem> */}
+            </form>
+          </GridItem>
         </GridContainer>
       </div>
     );

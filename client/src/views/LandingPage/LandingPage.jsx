@@ -316,11 +316,12 @@ class LandingPage extends React.Component {
         <Parallax
           image={require("assets/img/mountain.jpg")}
           filter="dark"
-          // style={{ maxHeight: "450px" }}
+          style={{ maxHeight: "550px" }}
         >
           <div className={classes.container}>
             <GridContainer>
               <GridItem xs={12} sm={10} md={10}>
+                <br />
                 <br />
                 <h1 style={{ fontSize: "45px" }} className={classes.title}>
                   La plateforme de l'aventure <br /> responsable.
