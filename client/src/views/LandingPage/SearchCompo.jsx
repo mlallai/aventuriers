@@ -130,7 +130,13 @@ class SearchCompo extends Component {
     return (
       <div>
         <GridContainer style={{}}>
-          <GridItem xs={12} md={5} style={{ marginBottom: "10px" }}>
+          <GridItem
+            xs={12}
+            sm={12}
+            md={12}
+            lg={5}
+            style={{ marginBottom: "10px" }}
+          >
             <form onValidate onSubmit={this.onSubmit}>
               {/* Choix du sport */}
               <Paper
@@ -143,7 +149,7 @@ class SearchCompo extends Component {
               </IconButton> */}
                 <InputBase
                   className={classes.input}
-                  placeholder="Recherchez par sport, lieu ou pays..."
+                  placeholder="Recherchez un sport, lieu ou pays..."
                   name="mainActivity"
                   value={this.state.mainActivity}
                   onChange={this.onChange}

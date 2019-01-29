@@ -8,6 +8,7 @@ import { getLatestAdventures } from "../../actions/adventureActions";
 import Moment from "react-moment";
 import FooterBar from "views/Footer/FooterBar.jsx";
 import Select from "@material-ui/core/Select";
+import Hidden from "@material-ui/core/Hidden";
 
 // @material-ui/core components
 import withStyles from "@material-ui/core/styles/withStyles";
@@ -326,11 +327,14 @@ class LandingPage extends React.Component {
                 <h1 style={{ fontSize: "45px" }} className={classes.title}>
                   La plateforme de l'aventure <br /> responsable.
                 </h1>
-                <h3>
-                  Adventurer est le premier site communautaire d'échange et de
-                  partage entre passionnés de sports outdoor.
-                </h3>
-                <br />
+                <Hidden smDown>
+                  <h3>
+                    Adventurer est le premier site communautaire d'échange et de
+                    partage entre passionnés de sports outdoor.
+                  </h3>
+                  <br />
+                </Hidden>
+
                 <SearchCompo />
                 {/* <Link to="/adventures">
                   <Button
