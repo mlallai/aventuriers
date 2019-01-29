@@ -449,7 +449,7 @@ class AddAdventure extends React.Component {
                               className={classes.selectLabel}
                               style={{ fontSize: "14px" }}
                             >
-                              Choix du sport
+                              Choix du sport *
                             </InputLabel>
                             <Select
                               MenuProps={{
@@ -489,7 +489,7 @@ class AddAdventure extends React.Component {
                               className: classes.customFormControlClasses
                             }}
                             inputProps={{
-                              placeholder: "Titre de l'aventure...",
+                              placeholder: "Titre de l'aventure... *",
                               onChange: this.onChange,
                               name: "title",
                               value: this.state.title
@@ -508,7 +508,7 @@ class AddAdventure extends React.Component {
                               className={classes.selectLabel}
                               style={{ fontSize: "14px" }}
                             >
-                              Niveau
+                              Niveau *
                             </InputLabel>
                             <Select
                               MenuProps={{
@@ -553,7 +553,7 @@ class AddAdventure extends React.Component {
                               letterSpacing: "0"
                             }}
                           >
-                            Lieu / Lieu de départ de l'aventure
+                            Lieu / Lieu de départ de l'aventure *
                           </p>
                           <Place
                             id="location"

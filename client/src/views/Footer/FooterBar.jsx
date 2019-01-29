@@ -2,6 +2,7 @@ import React from "react";
 import Footer from "components/Footer/Footer.jsx";
 import withStyles from "@material-ui/core/styles/withStyles";
 import landingPageStyle from "assets/jss/material-kit-pro-react/views/landingPageStyle.jsx";
+import Favorite from "@material-ui/icons/Favorite";
 
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
@@ -49,8 +50,14 @@ class FooterBar extends React.Component {
                 </List>
               </div>
               <div className={classes.right} style={{ fontSize: "14px" }}>
-                &copy; {1900 + new Date().getYear()} , made by Adventurer - All
-                rights reserved.
+                Made with{" "}
+                <Favorite
+                  className={classes.icon}
+                  style={{ color: "#ffcc00" }}
+                />{" "}
+                by Adventurer© for nature lovers.
+                <br />
+                All rights reserved, {1900 + new Date().getYear()}.
               </div>
             </div>
           }
