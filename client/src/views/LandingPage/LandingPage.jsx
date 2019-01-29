@@ -7,6 +7,7 @@ import { Link } from "react-router-dom";
 import { getLatestAdventures } from "../../actions/adventureActions";
 import Moment from "react-moment";
 import FooterBar from "views/Footer/FooterBar.jsx";
+import Select from "@material-ui/core/Select";
 
 // @material-ui/core components
 import withStyles from "@material-ui/core/styles/withStyles";
@@ -28,9 +29,12 @@ import SectionPreFooter1 from "views/ComponentsPage/Sections/SectionPreFooter1.j
 import Card from "components/Card/Card.jsx";
 import CardBody from "components/Card/CardBody.jsx";
 import CardHeader from "components/Card/CardHeader.jsx";
+import MenuItem from "@material-ui/core/MenuItem";
+import TextField from "@material-ui/core/TextField";
 
 import Info from "components/Typography/Info.jsx";
 import Badge from "components/Badge/Badge.jsx";
+import SearchCompo from "./SearchCompo.jsx";
 
 import landingPageStyle from "assets/jss/material-kit-pro-react/views/landingPageStyle.jsx";
 
@@ -75,6 +79,87 @@ class LandingPage extends React.Component {
     const { classes, ...rest } = this.props;
     const { isAuthenticated } = this.props.auth;
     const { loadedAdventures, loading } = this.state;
+
+    const mainActivityItems = [
+      {
+        name: "Alpinisme"
+      },
+      {
+        name: "Canyoning"
+      },
+      {
+        name: "Cyclisme"
+      },
+      {
+        name: "Equitation"
+      },
+      {
+        name: "Escalade"
+      },
+      {
+        name: "Canoë-kayak"
+      },
+      {
+        name: "Kitesurf"
+      },
+      {
+        name: "Paddle"
+      },
+      {
+        name: "Parachute"
+      },
+      {
+        name: "Parapente"
+      },
+      {
+        name: "Planche à voile"
+      },
+      {
+        name: "Plongée"
+      },
+      {
+        name: "Randonnée"
+      },
+      {
+        name: "Ski"
+      },
+      {
+        name: "Ski de fond"
+      },
+      {
+        name: "Ski de randonnée"
+      },
+      {
+        name: "Snowboard"
+      },
+      {
+        name: "Surf"
+      },
+      {
+        name: "Trail"
+      },
+      {
+        name: "Trek"
+      },
+      {
+        name: "Voile"
+      },
+      {
+        name: "Voyage à cheval"
+      },
+      {
+        name: "Voyage à pied"
+      },
+      {
+        name: "Voyage à vélo"
+      },
+      {
+        name: "VTT"
+      },
+      {
+        name: "Wakeboard"
+      }
+    ];
 
     let adventureLandingItem;
     if (loadedAdventures === null || loading) {
@@ -228,10 +313,15 @@ class LandingPage extends React.Component {
           }}
           {...rest}
         />
-        <Parallax image={require("assets/img/mountain.jpg")} filter="dark">
+        <Parallax
+          image={require("assets/img/mountain.jpg")}
+          filter="dark"
+          // style={{ maxHeight: "450px" }}
+        >
           <div className={classes.container}>
             <GridContainer>
-              <GridItem xs={12} sm={6} md={6}>
+              <GridItem xs={12} sm={10} md={10}>
+                <br />
                 <h1 style={{ fontSize: "45px" }} className={classes.title}>
                   La plateforme de l'aventure <br /> responsable.
                 </h1>
@@ -240,7 +330,8 @@ class LandingPage extends React.Component {
                   partage entre passionnés de sports outdoor.
                 </h3>
                 <br />
-                <Link to="/adventures">
+                <SearchCompo />
+                {/* <Link to="/adventures">
                   <Button
                     color="warning"
                     round
@@ -252,13 +343,23 @@ class LandingPage extends React.Component {
                       Rechercher une aventure
                     </span>
                   </Button>
-                </Link>
+                </Link> */}
               </GridItem>
             </GridContainer>
+            {/* <GridContainer>
+              <GridItem xs={12} style={{ textAlign: "center" }}>
+                <SearchCompo />
+              </GridItem>
+            </GridContainer> */}
           </div>
         </Parallax>
         <div className={classNames(classes.main, classes.mainRaised)}>
           <div className={classes.container}>
+            {/* <GridContainer>
+              <GridItem xs={12} style={{ textAlign: "center" }}>
+                <SearchCompo />
+              </GridItem>
+            </GridContainer> */}
             <GridContainer justify="center">
               <GridItem>
                 <h2 className={classes.title} style={{ color: "#3C4858" }}>

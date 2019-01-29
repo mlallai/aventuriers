@@ -59,10 +59,20 @@ class Adventures extends React.Component {
     document.body.scrollTop = 0;
     const { filters } = this.props;
     this.handleGetAdventures(filters);
+    console.log("this.props.match.params", this.props.match.params);
+    // if (this.props.match.params.mainActivity) {
+    //   this.setState(
+    //     {
+    //       searchTerm: this.props.match.params.mainActivity,
+    //       searchLoading: true
+    //     },
+    //     () => this.handleSearchAdventures()
+    //   );
+    // }
   }
 
   componentWillReceiveProps(nextProps) {
-    const { filters: nextFilters } = nextProps;
+    const { filters: nextFilters, params: nextParams } = nextProps;
     const { adventure } = nextProps;
     let loadedAdventures;
     if (adventure.adventures) {
@@ -73,13 +83,22 @@ class Adventures extends React.Component {
       this.handleGetAdventures(nextFilters);
 
       if (Object.keys(nextFilters).length === 0) {
-        console.log("nextFilters", nextFilters);
         const loadedAdventures = nextProps.adventure.adventures;
         this.handleGetAdventures(nextFilters);
         this.setState({
           loadedAdventures
         });
       }
+    }
+
+    if (this.props.match.params) {
+      this.setState(
+        {
+          searchTerm: this.props.match.params.mainActivity,
+          searchLoading: true
+        },
+        () => this.handleSearchAdventures()
+      );
     }
   }
 
@@ -101,7 +120,8 @@ class Adventures extends React.Component {
         (adventure.title && adventure.title.match(regex)) ||
         (adventure.summary && adventure.summary.match(regex)) ||
         (adventure.location && adventure.location.match(regex)) ||
-        (adventure.mainActivity[0] && adventure.mainActivity[0].match(regex))
+        (adventure.mainActivity[0] && adventure.mainActivity[0].match(regex)) ||
+        (adventure.country && adventure.country.match(regex))
       ) {
         acc.push(adventure);
       }
@@ -122,7 +142,6 @@ class Adventures extends React.Component {
   render() {
     const { classes, ...rest } = this.props;
     const { loadedAdventures, loading, searchTerm, searchResults } = this.state;
-    console.log("loadedAdventures dans le render", loadedAdventures);
     // const { adventures, loading } = this.props.adventures;
     const { isAuthenticated } = this.props.auth;
 

@@ -4,6 +4,7 @@ import React from "react";
 import PropTypes from "prop-types";
 // react components for routing our app without refresh
 import { Link } from "react-router-dom";
+import Input from "@material-ui/core/Input";
 
 // @material-ui/core components
 import withStyles from "@material-ui/core/styles/withStyles";
@@ -16,18 +17,17 @@ import Home from "@material-ui/icons/Home";
 
 // core components
 import Button from "components/CustomButtons/Button.jsx";
-import LoginModal from './LoginModal.jsx';
-import AlertModal from './AlertModal.jsx';
+import LoginModal from "./LoginModal.jsx";
+import AlertModal from "./AlertModal.jsx";
 
 import headerLinksStyle from "assets/jss/material-kit-pro-react/components/headerLinksStyle.jsx";
 
 function HeaderLinks({ ...props }) {
-
   const easeInOutQuad = (t, b, c, d) => {
     t /= d / 2;
-    if (t < 1) return c / 2 * t * t + b;
+    if (t < 1) return (c / 2) * t * t + b;
     t--;
-    return -c / 2 * (t * (t - 2) - 1) + b;
+    return (-c / 2) * (t * (t - 2) - 1) + b;
   };
 
   const smoothScroll = (e, target) => {
@@ -66,32 +66,45 @@ function HeaderLinks({ ...props }) {
   return (
     <List className={classes.list + " " + classes.mlAuto}>
       <ListItem className={classes.listItem}>
-      <Button
+        {/* <Input /> */}
+        <Button
           href="#pablo"
-          className={classes.navLink
+          className={
+            classes.navLink
             // + " " + classes.navLinkActive
           }
           onClick={e => e.preventDefault()}
           color="transparent"
-       >
-          <Link to="/adventures" color="transparent" className={classes.navLink}><Search />Rechercher</Link>
-       </Button>
+        >
+          <Link
+            to="/adventures"
+            color="transparent"
+            className={classes.navLink}
+          >
+            <Search />
+            Rechercher
+          </Link>
+        </Button>
+        {/* <SearchComponent /> */}
       </ListItem>
       <ListItem className={classes.listItem}>
-      <Button
+        <Button
           href="#pablo"
-          className={classes.navLink
+          className={
+            classes.navLink
             // + " " + classes.navLinkActive
           }
           onClick={e => e.preventDefault()}
           color="transparent"
-          
-       >
-          <Link to="/" color="transparent" className={classes.navLink}><Home />Accueil</Link>
-       </Button>
+        >
+          <Link to="/" color="transparent" className={classes.navLink}>
+            <Home />
+            Accueil
+          </Link>
+        </Button>
       </ListItem>
       <ListItem className={classes.listItem}>
-          <AlertModal feature={"créer une annonce"}/>
+        <AlertModal feature={"créer une annonce"} />
       </ListItem>
       <ListItem className={classes.listItem}>
         {/* <Button

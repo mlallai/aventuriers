@@ -102,7 +102,8 @@ ReactDOM.render(
           <PrivateRoute exact path="/messages" component={MessagePage} />
         </Switch>
         <Route exact path="/adventures" component={Adventures} />
-        <Route exact path="/adventure/:id" component={Adventure} />
+        <Route exact path="/adventures" component={Adventures} />
+        <Route exact path="/adventures/:mainActivity" component={Adventures} />
         <Route exact path="/private-policy" component={PrivatePolicy1} />
         <Route exact path="/terms" component={Terms} />
         <Route exact path="/contact" component={Contact} />
